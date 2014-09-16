@@ -491,8 +491,7 @@ class mgm_clickbank extends mgm_payment{
 		// find user
 		$user = null;
 		// check
-		if(isset($user_id) && (int)$user_id > 0) 
-			$user = get_userdata($user_id);
+		if(isset($user_id) && (int)$user_id > 0) $user = get_userdata($user_id);
 
 		// errors
 		$errors = array();

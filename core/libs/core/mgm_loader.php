@@ -10,7 +10,7 @@
 class mgm_loader{
 	// private attributes	
 	private $_tmpl_dir;	
-	private $_ajax;
+	
 	// construct
 	function __construct($tmpl_path=''){
 		// php4 construct
@@ -24,7 +24,7 @@ class mgm_loader{
 			$this->set_tmpl_path($tmpl_path);
 				
 		// ajax object
-		$this->ajax = new mgm_ajax();
+		$this->ajax = & new mgm_ajax();
 	}	
 		
 	// load template file

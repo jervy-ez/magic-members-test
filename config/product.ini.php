@@ -8,7 +8,7 @@
 
 ; product_version, required, should match Version in magicmembers/magicmembers.php, identify which version is on sale and dist
 
-product_version = 1.8.41
+product_version = 1.8.40
 
 
 

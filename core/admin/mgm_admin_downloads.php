@@ -52,7 +52,7 @@
 		if(isset($_POST['search_field_name'])) {
 			// issue#: 219
 			$search_field_name  = $_POST['search_field_name']; // for sql			
-			$search_field_value = mgm_escape($_POST['search_field_value']);// for sql
+			$search_field_value = $wpdb->escape($_POST['search_field_value']);// for sql
 			// view data	
 			$data['search_field_name'] 	= $_POST['search_field_name'];
 			//issue #1281						

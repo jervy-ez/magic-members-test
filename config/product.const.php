@@ -6,7 +6,7 @@
 
 // product_version, required, should match Version in magicmembers/magicmembers.php, identify which version is on sale and dist
 
-define('MGM_PRODUCT_VERSION', '1.8.41');
+define('MGM_PRODUCT_VERSION', '1.8.40');
 
 
 

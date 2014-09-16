@@ -58,20 +58,19 @@ if( get_option('mgm_auto_upgrader_api') == 'Active' ): // check from api
 		// The transient contains the 'checked' information  
 		// Now append to it information form your own API  
 		$plugin_slug = untrailingslashit(MGM_PLUGIN_NAME);   
-		//plugin version
-		$plugin_version = (isset($transient->checked[$plugin_slug]))?$transient->checked[$plugin_slug]:'';		
+		
 		// set up post
 		$args = array(
 			'action'      => 'check_version',
 			'plugin_slug' => $plugin_slug,
-			'version'     => $plugin_version
+			'version'     => $transient->checked[$plugin_slug]
 		);
 		
 		// append auth params
 		if(($response = mgm_get_class('auth')->check_version_api($args)) != FALSE){		
 			// If there is a new version, modify the transient  
 			if( isset($response->new_version) ){
-				if( version_compare( $response->new_version, $plugin_version, '>' ) ) {
+				if( version_compare( $response->new_version, $transient->checked[$plugin_slug], '>' ) ) {
 				 	$transient->response[$plugin_slug] = $response; 
 				} 
 			}

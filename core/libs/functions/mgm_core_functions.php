@@ -355,7 +355,7 @@ function mgm_get_available_plugins($flush=false){
 		$_plugin_dirs = $plugin_dirs;	
 	}
 	// extend plugin dirs	
-	if($plugin_dirs = glob(MGM_EXTEND_PLUGIN_BASE_DIR . $type . '/*', GLOB_ONLYDIR )){
+	if($plugin_dirs = glob(MGM_EXTEND_PLUGIN_DIR . $type . '/*', GLOB_ONLYDIR )){
 		$_plugin_dirs = array_merge($_plugin_dirs, $plugin_dirs);	
 	}
 	// check
@@ -399,11 +399,6 @@ function mgm_get_plugin($plugin_name){
 	
 	// plugin class name
 	$plugin_class = $plugin_name; // to allow override
-
-	// get module
-	// $module = apply_filters('mgm_load_plugin_' . $module['name'], $module); // mgm_load_module_paypal
-	// log
-	// mgm_log($module, __FUNCTION__);
 	
 	// load file if no class
 	if(!class_exists($plugin_class)){
@@ -423,7 +418,7 @@ function mgm_get_plugin($plugin_name){
 		}else{
 		// check in extend
 			// plugin_file
-			$plugin_file = MGM_EXTEND_PLUGIN_BASE_DIR . implode(DIRECTORY_SEPARATOR, array($plugin_folder, $plugin_name)) . '.php';
+			$plugin_file = MGM_EXTEND_PLUGIN_DIR . implode(DIRECTORY_SEPARATOR, array($plugin_folder, $plugin_name)) . '.php';
 			// include
 			if(file_exists($plugin_file)){			
 				// include

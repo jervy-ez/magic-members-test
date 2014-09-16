@@ -296,7 +296,7 @@ class mgm_system extends mgm_object{
 		$this->setting['enable_excerpt_protection'] = 'Y';
 		
 		// Enable comments protection
-		$this->setting['enable_comments_protection'] = 'N';		
+		$this->setting['enable_comments_protection'] = 'Y';		
 		
 		// enable site lockdown for guest users
 		$this->setting['enable_guest_lockdown'] = 'N';	

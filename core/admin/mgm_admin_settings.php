@@ -84,8 +84,8 @@
 			// update
 			$system_obj->save();
 			 
-			// affiliate - issue #1758
-			if((isset($_POST['use_affiliate_link']) == 'Y' ) && isset($_POST['affiliate_id'])){
+			// affiliate
+			if($_POST['use_affiliate_link'] == 'Y' && $_POST['affiliate_id']){
 				update_option('mgm_affiliate_id', intval($_POST['affiliate_id']));
 			}else{
 				delete_option('mgm_affiliate_id');

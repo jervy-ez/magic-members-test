@@ -716,7 +716,7 @@ class mgm_member_custom_fields extends mgm_object{
 						$fields[$password_conf['id']] = $password_conf;
 					}
 					// email included  - issue #1315
-					if($field['name']=='email' && isset($field['attributes']['email_confirm'])){
+					if($field['name']=='email' && $field['attributes']['email_confirm']){
 						// add password conf internally
 						$email_conf = $this->get_email_conf_field();
 						// reset hide label here 

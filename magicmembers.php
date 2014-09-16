@@ -14,11 +14,11 @@
 
  Author URI: http://www.magicalmediagroup.com/
 
- Version: 1.8.41
+ Version: 1.8.40
 
  Build: 2.8.0
 
- Distribution: 03/25/2014
+ Distribution: 07/02/2014
 
  Requires: Atleast WP 3.1+, Tested upto WP 3.8.1
 

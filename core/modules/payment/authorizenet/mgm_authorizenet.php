@@ -395,7 +395,7 @@ class mgm_authorizenet extends mgm_payment{
 			$this->_process_response('bypass', null);					
 		}
 		// log
-		mgm_log('AIM: ' . mgm_pr($this->response, true), $this->module.__FUNCTION__);
+		mgm_log($this->response, __FUNCTION__);
 		// if recurring CREATE ARB subscription:
 		// issue#: 581 changes:
 		// if AIM is success 			
@@ -403,8 +403,6 @@ class mgm_authorizenet extends mgm_payment{
 			// cancel previous subscription:		
 			// no need of passing previous pack id here as ARB creation happens after AIM transaction
 			$this->cancel_recurring_subscription((isset($post_data['x_custom']) ? $post_data['x_custom'] : NULL)); sleep(1);
-			// log
-			mgm_log('recurring: '.$recurring, $this->module.__FUNCTION__);
 			// if recurring
 			if($recurring) {
 				// reset amount if taken from trial:
@@ -423,10 +421,9 @@ class mgm_authorizenet extends mgm_payment{
 				// $this->_curl_post($endpoint, $post_string, $http_header);
 				// parse response		
 				$arb_response = $this->_process_response($gateway_method, $http_response, false);	
-				// log				
-				mgm_log('ARB:'. mgm_pr($arb_response, true), $this->module.__FUNCTION__);
+				// log
 				// check							
-				if( (int)$arb_response['response_status'] == 1) {
+				if($arb_response['response_status'] == 1) {
 					//add recurring subscription id to the response
 					$this->response['subscription_id'] = $arb_response['subscription_id'];
 					//created ARB
@@ -648,19 +645,10 @@ class mgm_authorizenet extends mgm_payment{
 			// cust id
 			$data['x_cust_id'] = $user_id;
 			// types
-			$unit_types = array('d'=>'days', 'w'=>'days', 'm'=>'months', 'y'=>'months');	// treat year a 12 x months	also  treat 7 x weeks
+			$unit_types = array('d'=>'days', 'm'=>'months', 'y'=>'months');	// treat year a 12 x months	
 			// interval
-			$data['x_interval_unit']   = $unit_types[strtolower($pack['duration_type'])]; // days|months			
-			//$data['x_interval_length'] = ($pack['duration_type']=='y') ? ((int)$pack['duration'] * 12) : $pack['duration']; // 3|12|365 etc.
-			
-			//issue #1768
-			if(strtolower($pack['duration_type'])=='y'){
-				$data['x_interval_length'] = ((int)$pack['duration'] * 12);
-			}elseif (strtolower($pack['duration_type'])=='w'){
-				$data['x_interval_length'] = ((int)$pack['duration'] * 7);
-			}else {
-				$data['x_interval_length'] = $pack['duration'];
-			}			
+			$data['x_interval_unit']   = $unit_types[$pack['duration_type']]; // days|months
+			$data['x_interval_length'] = ($pack['duration_type']=='y') ? ((int)$pack['duration'] * 12) : $pack['duration']; // 3|12|365 etc.
 			
 			// start date
 			// $data['x_start_date'] = date('Y-m-d') ;
@@ -674,17 +662,7 @@ class mgm_authorizenet extends mgm_payment{
 				$data['x_trial_amount']      = $pack['trial_cost'];	
 				//rewrite start date:
 				$trial_interval_unit  		 = $unit_types[$pack['trial_duration_type']]; // days|months
-				//$trial_interval_length 		 = ($pack['trial_duration_type']=='y') ? ((int)$pack['trial_duration'] * 12) : $pack['trial_duration']; // 3|12|365 etc.
-				
-				//issue #1768
-				if(strtolower($pack['trial_duration_type'])=='y'){
-					$trial_interval_length 	=  ((int)$pack['trial_duration'] * 12);
-				}elseif (strtolower($pack['trial_duration_type'])=='w'){
-					$trial_interval_length 	= ((int)$pack['trial_duration'] * 7);
-				}else {
-					$trial_interval_length 	=  $pack['trial_duration'];
-				}
-								
+				$trial_interval_length 		 = ($pack['trial_duration_type']=='y') ? ((int)$pack['trial_duration'] * 12) : $pack['trial_duration']; // 3|12|365 etc.
 				$trial_add_by = str_replace('s', '', $trial_interval_unit);
 				$data['x_start_date'] = date( 'Y-m-d', strtotime("+{$trial_interval_length} {$trial_add_by}", strtotime(date('Y-m-d')) )) ;
 			}
@@ -1897,7 +1875,8 @@ class mgm_authorizenet extends mgm_payment{
 		// gateway method
 		switch($gateway_method){
 			case 'arb':
-				if( $xml = @simplexml_load_string($content) ){
+				$xml = @simplexml_load_string($content);				
+				if($xml){
 					$resultCode                   = (string)$xml->messages->resultCode;
 					$temp_resp['response_status'] = (strtolower($resultCode) == 'ok') ? 1 : 3; // 1 success, 3 error
 					$temp_resp['message_code']    = (string)$xml->messages->message->code ;	
@@ -1958,7 +1937,7 @@ class mgm_authorizenet extends mgm_payment{
 				$temp_resp['transaction_type'] = 'trial_bypass';
 			break;
 			case 'transaction_details':
-				/*$xml = @simplexml_load_string($content);				
+				$xml = @simplexml_load_string($content);				
 				if($xml){
 					// transaction
 					$temp_resp['transId']            = (string)$xml->transaction->transId;	
@@ -1975,54 +1954,11 @@ class mgm_authorizenet extends mgm_payment{
 				}else{
 					$temp_resp['response_status']    = 3;
 					$temp_resp['message_text']       = 'Error parsing XML';					
-				}	*/		
-				if( $xml = @simplexml_load_string($content) ){
-					// log
-					// mgm_log($xml, __FUNCTION__);
-					// check for error 
-					if ( isset($xml->messages->resultCode) && 'ok' == strtolower((string)$xml->messages->resultCode) ){
-						// transaction
-
-						$temp_resp['transId']            = (string)$xml->transaction->transId;	
-
-						// batch
-
-						if(isset($xml->transaction->batch->batchId)){
-
-							$temp_resp['batchId']      = (string)$xml->transaction->batch->batchId;	
-
-						}						
-
-						// tran date is update in rebill
-
-						if(isset($xml->transaction->batch->settlementTimeLocal)){
-
-							$temp_resp['transDate']      = (string)$xml->transaction->batch->settlementTimeUTC;
-
-						}else{
-
-							$temp_resp['transDate']      = (string)$xml->transaction->submitTimeUTC;		
-
-						}	
-					}else{
-
-						$temp_resp['response_status']    = 5;
-
-						$temp_resp['message_text']       = (string)$xml->messages->message->text;	
-						$temp_resp['message_code']       = (string)$xml->messages->message->code;		
-
-					}							
-
-				}else{
-
-					$temp_resp['response_status']    = 3;
-
-					$temp_resp['message_text']       = 'Error parsing XML';					
-
-				}		
+				}				
 			break;
 			case 'subscription_status':
-				if( $xml = @simplexml_load_string($content) ){
+				$xml = @simplexml_load_string($content);				
+				if($xml){
 					$resultCode                       = (string)$xml->messages->resultCode;
 					$temp_resp['response_status']     = (strtolower($resultCode) == 'ok') ? 1 : 3; // 1 success, 3 error
 					// subscription_status
@@ -2037,7 +1973,7 @@ class mgm_authorizenet extends mgm_payment{
 		}		
 		
 		// return
-		if( ! $set_response ) return $temp_resp;
+		if(!$set_response) return $temp_resp;
 			
 		// set
 		$this->response = $temp_resp;		
@@ -2083,7 +2019,7 @@ class mgm_authorizenet extends mgm_payment{
 		if(strlen($phone) != 10){
 			return '';
 		}else{
-			return sprintf('(%s) %s-%s', substr($phone,0,3), substr($phone,3,3),substr($phone,6,4));
+			return sprintf('(%d) %d-%d', substr($phone,0,3), substr($phone,3,3),substr($phone,6,4));
 		}
 	}
 	

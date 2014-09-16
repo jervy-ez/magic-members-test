@@ -26,7 +26,7 @@ class mgm_autoresponder extends mgm_component{
 	// postfields
 	var $postfields     = array();
 	// status, deprecated
-	// var $status      = 'live';
+	// var $status         = 'live';
 	// method
 	var $method         = 'subscribe'; 
 	
@@ -241,7 +241,7 @@ class mgm_autoresponder extends mgm_component{
 		// set params, to be overridden by child class		
 		if($this->set_postfields($user_id)){
 		// transport			
-			return $this->_transport($user_id);
+			return $this->_transport();
 		}
 		// return
 		return false;
@@ -262,7 +262,7 @@ class mgm_autoresponder extends mgm_component{
 		// set params, to be overridden by child class
 		if($this->set_postfields($user_id)){
 		// transport
-			return $this->_transport($user_id);
+			return $this->_transport();
 		}
 		// return
 		return false;
@@ -377,7 +377,7 @@ class mgm_autoresponder extends mgm_component{
 		);
 		
 		// return
-		return apply_filters('mgm_autoresponder_curl_options', $curl_options, $this->code);
+		return $curl_options;
 	}
 	
 	/**
@@ -424,10 +424,10 @@ class mgm_autoresponder extends mgm_component{
 	/**
 	 * API helper method transport
 	 *
-	 * @param int $$user_id
+	 * @param none
 	 * @return bool
 	 */
-	function _transport($user_id){
+	function _transport(){
 		// method
 		$method = $this->get_method();
 		
@@ -440,7 +440,7 @@ class mgm_autoresponder extends mgm_component{
 		// proxy submit
 		if(!$result = $this->get_proxy($post_url)){
 			// post fields
-			$fields = $this->_get_postfields($user_id);
+			$fields = $this->_get_postfields();
 			
 			// curl handle
 			$ch = curl_init($post_url);		
@@ -533,9 +533,7 @@ class mgm_autoresponder extends mgm_component{
 	 * @param none
 	 * @return string $postfields
 	 */
-	function _get_postfields($user_id){
-		// new filter
-		$this->postfields = apply_filters( 'mgm_autoresponder_get_postfields', $this->postfields, $this->code, $user_id );
+	function _get_postfields(){
 		// check
 		if( is_array($this->postfields) ){
 			// return 
@@ -758,7 +756,7 @@ class mgm_autoresponder extends mgm_component{
 		}
 		
 		// filter
-		$this->postfields = apply_filters('mgm_autoresponder_set_extra_postfields', $this->postfields, $this->code, $userdata);
+		$this->postfields = apply_filters('mgm_autoresponder_set_extra_postfields', $this->postfields, $this->module, $userdata);
 		// finish
 	}
 	
