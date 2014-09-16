@@ -1,0 +1,44 @@
+/* CSS Document */
+/*
+#wp-admin-bar-my-account img.avatar {width:16px !important;}
+#wp-admin-bar-user-info img.avatar {
+
+    height: 64px;
+
+    position: static !important;
+
+    width: 64px !important;
+
+}
+*/
+#wp-admin-bar-my-account > a img:first-child {
+
+background: none repeat scroll 0 0 #EEEEEE;
+
+border: 1px solid #999999;
+
+display: inline;
+
+float: none;
+
+height: 16px;
+
+line-height: 24px;
+
+margin: -3px 0 0 6px;
+
+padding: 0;
+
+vertical-align: middle;
+
+width: 16px;
+
+}
+
+ 
+
+#wpadminbar #wp-admin-bar-my-account #wp-admin-bar-user-actions > li {
+
+    margin-left: 88px;
+
+}

@@ -1,0 +1,164 @@
+/* Dashboard  */
+#mgm_dashboard_widget_statistics p.sub, #mgm_dashboard_widget_statistics .table, #mgm_dashboard_widget_statistics .versions {
+	margin: -12px;
+}
+
+#mgm_dashboard_widget_statistics a{
+	color: #21759B;
+}
+
+#mgm_dashboard_widget_statistics .inside {
+	font-size: 12px;
+	padding-top: 20px;
+}
+
+#mgm_dashboard_widget_statistics p.sub {
+	padding: 5px 0 15px;
+	color: #8f8f8f;
+	font-size: 14px;
+	position: absolute;
+	top: -17px;
+	left: 15px;
+}
+
+#mgm_dashboard_widget_statistics .table {
+	margin: 0;
+	padding: 0;
+	position: relative;
+}
+
+#mgm_dashboard_widget_statistics .table_content {
+	float: left;
+	border-top: #ececec 1px solid;
+	width: 45%;
+}
+
+#mgm_dashboard_widget_statistics .table_discussion {
+	float: right;
+	border-top: #ececec 1px solid;
+	width: 45%;
+}
+
+#mgm_dashboard_widget_statistics table td {
+	padding: 3px 0;
+	white-space: nowrap;
+}
+
+#mgm_dashboard_widget_statistics table tr.list td {
+	border-top: none;
+}
+
+#mgm_dashboard_widget_statistics td.count{
+    font-family: Georgia,"Times New Roman","Bitstream Charter",Times,serif;
+}
+
+#mgm_dashboard_widget_statistics td.count {
+	padding-right: 6px;
+	text-align: right;
+	font-size: 14px;
+	width: 1%;
+}
+
+#mgm_dashboard_widget_statistics td.count a {
+	font-size: 18px;	
+}
+
+#mgm_dashboard_widget_statistics td.count a:hover {
+	color: #d54e21;
+}
+
+#mgm_dashboard_widget_statistics .name {
+	font-size: 12px;
+	padding-right: 12px;
+	padding-top: 6px;
+	color: #777;
+}
+
+#mgm_dashboard_widget_statistics .name a {
+	white-space: nowrap;
+}
+
+#mgm_dashboard_widget_statistics a.button {
+	float: right;
+	clear: right;
+	position: relative;
+	top: -5px;
+}
+
+#mgm_dashboard_widget_statistics .versions{
+	border-top: #ececec 1px solid;
+	clear:both;
+	height:30px;
+	margin-left:5px;
+}
+
+#mgm_dashboard_widget_statistics .s-inactive{ color:#0000FF; font-weight:normal}
+#mgm_dashboard_widget_statistics .s-active{ color:#00CC00; font-weight:normal}
+#mgm_dashboard_widget_statistics .s-expired{ color:#FF3300; font-weight:normal}
+#mgm_dashboard_widget_statistics .s-pending{ color:#999966; font-weight:normal}
+#mgm_dashboard_widget_statistics .s-expired-trial{ color:#FF6633; font-weight:normal}
+#mgm_dashboard_widget_statistics .s-canceled{ color:#FF33CC; font-weight:normal}
+#mgm_dashboard_widget_statistics .s-error{ color:#660066; font-weight:normal}
+#mgm_dashboard_widget_statistics .s-canceled-awaiting{ color:#FF9966; font-weight:normal}
+
+/* widget hard coded styles movie to css */
+.mgm_margin_bottom_5px {
+	margin-bottom: 5px;
+}
+.mgm_width_300px {
+	width: 300px;
+}
+.mgm_width_30px {
+	width: 30px;
+}
+.mgm_width_230px {
+	width:230px;
+}
+.mgm_width_50px {
+	width:50px;
+}
+.mgm_width_55px {
+	width:55px;
+}
+.mgm_width_100px {
+	width:100px;
+}
+.mgm_width_100pr {
+	width:100%;
+}
+.mgm_padding_5px {
+	padding:5px;
+}
+.mgm_render_my_purchased_posts_div {
+	border-bottom: 1px solid #EFEFEF; 
+	font-weight:bold; 
+	width: 100%;
+}
+.mgm_font_italic {
+	font-style:italic;
+}
+.mgm_font_size_11px {
+	font-size:11px;
+}
+.mgm_font_size_8px {
+	font-size:8px;
+}
+.mgm_post_setup_meta_box_div {
+	border-bottom:1px solid #D7E5EE; height:25px; 
+}
+.mgm_post_setup_meta_box_ul {
+	list-style: none; margin: 0; padding: 3px;
+}
+.div_table {position:relative;}
+div.div_table div.row {display:table; width:100%; border-collapse:collapse;}
+div.div_table div.row div.cell {display: table-cell;padding:2px;}
+div.div_table div.row.br_bottom{border-bottom:1px solid #DFDFDF;}
+
+.mgm_aleft{
+	text-align: left !important;
+}
+
+#mgm_dashboard_widget_statistics .m-waiting{ margin-top: 0 !important;}
+#mgm_dashboard_widget_statistics .m-waiting span{float:left !important;}
+
+

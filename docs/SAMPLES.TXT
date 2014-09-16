@@ -1,0 +1,69 @@
+------------------------------------------------------------------
+ Capture custom user fields and update call
+
+------------------------------------------------------------------
+
+// get saved
+$custom_fields = mgm_get_member_custom_fields($user_ID);
+
+// print
+echo '<br>Before<br>';
+mgm_array_dump($custom_fields);
+
+// set , update
+// param@ : user_id
+// param@ : associative array of field=>value pair to update
+$success = mgm_set_member_custom_fields($user_ID, array('country'=>'IN'));
+
+// get saved
+$custom_fields = mgm_get_member_custom_fields($user_ID);
+
+// print
+echo '<br> After<br>';
+mgm_array_dump($custom_fields);
+
+
+----------------------------------------------------
+Update user/member status
+----------------------------------------------------
+
+// get member object, this will onlt work when magicmember is active
+
+if(function_exists('mgm_get_member')){
+	// this will check the usermeta existence and return the saved if so found or create new empty instance of mgm_member class object
+	$member = mgm_get_member($user_id); 
+	// set new status
+	$member->status = MGM_STATUS_EXPIRED; // expired
+	// or active
+	$member->status = MGM_STATUS_ACTIVE; // active
+	// status description
+	$member->status_str = __('Subscription activated manually','mgm'); // active
+	// save
+	$member->save();
+}
+
+----------------------------------------------------
+Update user/member membership type/level
+----------------------------------------------------
+
+// get member object, this will onlt work when magicmember is active
+
+if(function_exists('mgm_get_member')){
+	// this will check the usermeta existence and return the saved if so found or create new empty instance of mgm_member class object
+	$member = mgm_get_member($user_id); 
+	// set new status
+	$member->membership_type = $membership_type_code; // type code, which should be lowercase, spaces removed by underscore(_) type name
+	// save
+	$member->save();
+}
+--------------------------------------------
+Available statuses
+-------------------------------------------
+MGM_STATUS_NULL            = Inactive
+MGM_STATUS_ACTIVE          = Active
+MGM_STATUS_EXPIRED         = Expired
+MGM_STATUS_PENDING         = Pending
+MGM_STATUS_TRIAL_EXPIRED   = Trial Expired
+MGM_STATUS_CANCELLED       = Cancelled
+MGM_STATUS_ERROR           = Error
+MGM_STATUS_AWAITING_CANCEL = Awaiting Cancelled

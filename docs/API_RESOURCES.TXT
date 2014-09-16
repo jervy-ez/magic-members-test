@@ -1,0 +1,85 @@
+API RESOURCES:
+
+ GET CALL SAMPLE : <site>/mgmapi/<resource>.<format>?X-MGMAPI-KEY=<apikey>
+ usage sample for api key in headers will be curl_setopt($handle, CURLOPT_HTTPHEADER, array('X-MGMAPI-KEY: n85TcoUP'));
+ 
+ generate api key in misc. settings -> Rest API -> API Access Keys 
+ 
+ DO NOT TEST UNLESS COMPLETE FLAG SET
+ 
+Members:  mgmapi/members   
+	members.<format>                                      -- get all members, 
+	                                                         filters, id=<id>,username=<username>,membership_type=<membership_type>,
+															 status=<status>,pack_id=<pack_id> 
+											                 nested object will have users node following user nodes
+											                 @url: <site>/mgmapi/members.xml?X-MGMAPI-KEY=<key>													 
+													         [status:complete]
+	
+	members/:id.<format>                                  -- get one member by id, nested object will have user node only	
+	                                                         @url: <site>/mgmapi/members/<id>.xml?X-MGMAPI-KEY=<key> 													 
+													         [status:complete]		
+																			
+	members/:id/posts.<format>                            -- get posts accessible to the member [status:complete]
+	members/export                                        -- export members, query params set by post [status:future]
+	members/:id/export 
+	members/import                                        -- import members, query params set by post [status:future]
+	members/:id/export 
+	
+Membership Types:  mgmapi/membership_types 	
+	membership_types.<format>                             -- get all membership types [status:complete]
+	membership_types/:code.<format>                       -- get membership type by code  [status:complete]
+	membership_types/create.<format>                      -- create membership type [POST VERB] [status:complete]
+	membership_types/update/:code.<format>                -- update membership type [POST VERB]	[status:complete]
+	membership_types/delete.<format>                      -- delete membership type [POST VERB]	[status:complete]
+	membership_types/delete_all.<format>                  -- delete all membership type [POST VERB]	[status:complete]
+	membership_types/:code/posts/:post_type.<format>      -- get posts/pages/custom post types accessible to the membership type [status:complete]
+	membership_types/:code/taxonomies/:taxonomy.<format>  -- get taxonomies accessible to the membership type( categories etc.) [status:complete]
+	membership_types/:code/members.<format>               -- get members subscribed to the membership type [status:complete]
+	
+Subscription Packages: mgmapi/subscription_packages
+	subscription_packages.<format>                        -- get all subscription packages [status:complete]
+	subscription_packages/:id.<format>                    -- get subscription package by id [status:complete]
+	subscription_packages/create.<format>                 -- create subscription package [POST VERB] [status:complete]	
+	subscription_packages/update/:id.<format>             -- update subscription package [POST VERB] [status:complete]
+	subscription_packages/delete.<format>                 -- delete subscription package [DELETE VERB] [status:complete]
+	subscription_packages/delete_all.<format>             -- delete all subscription packages [DELETE VERB] [status:complete]
+	subscription_packages/:id/members.<format>            -- get members subscribed to the subscription package [status:complete]
+   
+Contents: mgmapi/contents
+	contents/protected.<format>                           -- get all protected contents ( posts, pages, custom post types, taxonomies, categories etc. ) [status:complete]
+	--contents/protected/:post_type.<format>              -- get all protected contents by post type ( post, page, custom post type etc. ) [status:complete]
+	--contents/protected/:post_type/:id.<format>          -- get protected content by post type and id( post, page, custom post type etc. ) [status:complete]
+	--contents/protected/:taxonomy.<format>               -- get all protected taxonomies by taxonomy ( categories etc. ) [status:complete]
+	
+	contents/purchasable.<format>                         -- get all purchasable contents ( posts, pages, custom post types etc. ) [status:complete]
+	--contents/purchasable/:post_type.<format>            -- get all purchasable contents by post type ( post, page, custom post type etc. ) [status:complete]
+	--contents/purchasable/:post_type/:id.<format>        -- get all purchasable content by post type and id ( post, page, custom post type etc. ) [status:complete]
+	
+	contents/purchased.<format>                           -- get all purchased contents ( posts, pages, custom post types etc. ) [status:complete]
+	--contents/purchased/:post_type.<format>              -- get all purchased contents by post type ( post, page, custom post type etc. )  [status:complete]
+	--contents/purchased/:post_type/:id.<format>          -- get purchased content by post type and id ( post, page, custom post type etc. ) [status:complete]
+	
+	contents/gifted.<format>                              -- get all gifted contents ( posts, pages, custom post types ) [status:complete]
+	contents/gift.<format>                                -- gift content ( posts, pages, custom post types ) [status:future]
+	
+	contents/drips/:membership_type.<format>              -- list contents drips / access delays by membership type, group by posts [status:future] 
+	contents/drips/:post_id.<format>                      -- list contents drips / access delays by post_id, group by membership type/level [status:future] 	
+	
+Downloads: mgmapi/downloads
+	downloads.<format>                                    -- get all downloads [GET VERB] [status:complete]
+	downloads/:id.<format>                                -- get download by id [GET VERB] [status:complete]
+	downloads/create.<format>                             -- create download [POST VERB] [status:complete]	
+	downloads/update.<format>                             -- update download [POST VERB] [status:complete]
+	downloads/delete.<format>                             -- delete download [DELETE VERB] [status:complete]
+	downloads/delete_all.<format>                         -- delete all download [DELETE VERB] [status:complete]
+
+Coupons: mgmapi/coupons
+	coupons.<format>                                      -- get all coupons [status:complete]
+	coupons/:id.<format>                                  -- get coupon by id [status:complete]
+	coupons/create.<format>                               -- create coupon [POST VERB] [status:complete]	
+	coupons/update/:id.<format>                           -- update coupon [POST VERB] [status:complete]
+	coupons/delete/:id.<format>                           -- delete coupon [POST VERB] [status:complete]	
+	coupons/:id/members.<format>                          -- get members subscribed to the coupon [status:future]
+	
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++	
+	**THIS IS BASIC RESOURCE PLANNING, WILL UPDATE/IMPROVE BASED ON FURHER REQUIREMENT/DEVELOPEMT** 

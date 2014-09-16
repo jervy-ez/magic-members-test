@@ -1,0 +1,270 @@
+/* CSS Document */
+
+.mgm_register_field, .mgm_profile_field,.mgm_upgrade_field,.mgm_extend_field,.mgm_field_textarea{
+	background:#FBFBFB none repeat scroll 0 0; 
+	border:1px solid #E5E5E5; 
+	font-size:24px; 
+	margin-bottom:16px; 
+	margin-right:6px; 
+	margin-top:2px; 
+	padding:3px; 
+	width:97%;
+}
+
+.mgm_date{
+	width:150px;
+	font-style:oblique;
+}
+
+.mgm_paymod_description{
+	font-size:11px;
+	font-style:oblique;
+	text-align:justify;
+	margin-top:5px;
+}
+
+.mgm_field_html{
+	width:97%; 
+	height: 200px; 
+	overflow: auto; 
+	background: #FBFBFB; 
+	border:1px solid #E5E5E5; 
+	padding:3px; 
+	margin: 5px 0 5px 0;
+}
+
+/*used for element type label*/
+.mgm_field_label{
+}
+
+.mgm_field_textarea{
+	height:100px;
+}
+
+.mgm_subs_wrapper{
+	margin:10px 0px; 
+	overflow: auto;
+}
+
+.mgm_subs_option{
+	float: left; 
+	width: 25px;
+}
+
+.mgm_subs_pack_desc{
+	float: left; 
+	width: 245px;
+}
+
+.clearfix{
+	clear:both;
+}
+
+.mgm_subs_desc{
+	padding:10px 5px 5px 25px; 
+	color:#2888B5;
+	font-style:oblique;	
+}	
+
+.mgm_payment_opt_customfield_image{
+	margin:10px 0px 0px 15px;
+	height: 60px;	
+}
+
+/*mgm_misc_functions hard coded style changes*/
+
+.mgm_get_subs_btn{
+/*	height:45px; */
+	font-weight:bold;
+	text-align: center;
+}
+
+.mgm_get_subs_height{
+	height:45px;
+}
+
+.mgm_get_pack_form_container{
+	clear: both; 
+	overflow: hidden; 
+	padding-bottom: 5px;
+}
+
+.mgm_custom_profile_birthdate {
+	width:300px;
+}
+
+.mgm_custom_profile_password {
+	width:300px;
+}
+
+.mgm_custom_subs_introduction {
+	height: 200px; 
+	overflow: auto; 
+	background: #FBFBFB; 
+	border:1px solid #E5E5E5; 
+	padding:3px; 
+	margin: 5px 0 5px 0;
+}
+
+.mgm_custom_filed_table{
+	width:100%;
+}
+
+.mgm_custom_filed_col{
+	width:125px;
+}
+
+.mgm_custom_filed_td{
+	text-align: left; 
+	vertical-align: top;
+}
+
+.mgm_custom_filed_right_align{
+	text-align: right; 
+}
+
+.mgm_sidebar_register_links_container{
+
+	border-bottom: 1px solid #EFEFEF; 
+	overflow: auto; 
+	margin-bottom: 5px;
+	text-align:left;
+}
+
+.mgm_sidebar_register_pack_str{
+	float: left; 
+	margin-bottom: 5px; 
+	font-size: 14px; 
+	font-style:italic;
+}
+
+.mgm_sidebar_pack_overview{
+	float: left; 
+	width: 100%; 
+	margin-bottom: 5px;
+}
+
+.mgm_sidebar_pack_string{
+ 	margin-bottom: 5px; 
+ 	font-size: 14px;
+ 	float: left; 
+}
+
+.mgm_sidebar_module_container{
+	float: left; 
+	overflow:auto; 
+	margin: 0px 5px 5px 0px; 
+	text-align: left;
+}
+
+.mgm_sidebar_module_button{
+	margin: 0px; 
+	border-collapse: collapse; 
+	border: none !important;
+}
+
+.clear_padding_marginfix{
+	clear:both;
+	padding: 0; 
+	margin: 0;
+}
+
+.post_purchase_select_gateway{
+	margin-bottom:5px;
+	width:100%;
+}
+
+/*payment module hard coded style changes*/
+
+.mgm_button_subscribe_payment{
+	color:red; 
+	font-style:oblique; 
+	text-align:center; 
+	height:100px; 
+	padding:15px; 
+	vertical-align:middle;
+}
+
+.mgm_text_width_payment{
+	width:50px; 
+}
+
+.mgm_margin_bottom_10px{
+	margin-bottom:10px;
+}
+
+.mgm_form{
+ font-weight: normal;
+}
+
+.mgm_line_height_15px{
+	line-height:15px;
+}
+.mgm_displaynone{
+	display:none;
+}
+.mgm_no_payment_gateway{
+	margin-bottom:5px;
+	width:100%;
+	color:red;
+	font-weight:bold;
+}
+
+.lostpassword-form-buttons{
+	margin-top:10px;
+
+}
+
+.lostpassword-form-links{
+	margin-top:10px;
+	clear:both;
+}
+.profile_group_photo {
+	font-size: 10px;
+	letter-spacing: 0.1em;
+	line-height: 2.6em;
+	text-transform: uppercase;
+}
+.profile_group_name {
+	font-size: 10px;
+	letter-spacing: 0.1em;
+	line-height: 2.6em;
+	text-transform: uppercase;
+}
+.profile_group_contact_info {
+	font-size: 10px;
+	letter-spacing: 0.1em;
+	line-height: 2.6em;
+	text-transform: uppercase;
+}
+.profile_group_about_yourself {
+	font-size: 10px;
+	letter-spacing: 0.1em;
+	line-height: 2.6em;
+	text-transform: uppercase;
+}
+.profile_group_others {
+	font-size: 10px;
+	letter-spacing: 0.1em;
+	line-height: 2.6em;
+	text-transform: uppercase;
+}
+
+.mgm_file_browse_wrapper {
+    background: url('../../images/file_browse_normal.png') 0 0 no-repeat;
+    border:none;
+    overflow:hidden;
+}
+.mgm_file_browse_wrapper:hover {
+    background: url('../../images/file_browse_hover.png') 0 0 no-repeat;
+}
+.mgm_file_browse_wrapper:active {
+    background: url('../../images/file_browse_pressed.png') 0 0 no-repeat;
+}
+
+.mgm_field_file{
+    margin-left:-145px;
+    opacity:0.0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+}

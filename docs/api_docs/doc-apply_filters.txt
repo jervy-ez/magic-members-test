@@ -1,0 +1,1051 @@
+1> mgm_module_rebill_status
+  
+   @filesource admin/mgm_admin_members.php ( In multifiles)
+   @line 2092 (multiline)
+   
+   @param int $user_id
+   @param object $member
+   @return boolean
+   
+   @desc specifically check members rebill status
+   
+2>  mgm_post_update   
+
+    @filesource admin/mgm_admin_settings.php (multifile)
+    @line 214 (multiline)
+   
+    @param object mgm_post class object
+    @param int post id
+	@return object mgm_post class object
+	
+	@desc  modifies after payment default message display html
+	
+3>	mgm_logout_links
+   
+    @filesource hooks/mgm_content_hooks.php
+    @line 906
+   
+    @param the default logout link placed in top menu $logout_links
+	@return 
+	
+	@desc  modify and allow adding more custom 3rd party logout links to default logout link, 
+	      primarily developed for facebook connect and can be directly called to place button anywhere 
+		  
+		  i.e. mgm_facebook_logout_link() 
+		  
+		  or just define new filter and add to the same callback, ability for designer to place logout link any place 
+
+4>  mgm_powered_by
+
+    @filesource hooks/mgm_content_hooks.php
+    @line 1415
+   
+    @param @string: default content and magicmembers link  $content
+	@return 
+	
+	@desc update powered by text in template footer, to position the text, add tag <?php do_action( 'mgm_footer_credits' ); ?> in template file or call 
+         <?php mgm_print_footer_credits();?>, this will disable the auto placement and add powered by in position you want.
+	
+5>  post_purchase_button_html
+
+	@filesource hooks/mgm_content_hooks.php (multifile)
+    @line 1644 (multiline)
+   
+    @param the button content $button_code
+	
+	@desc modify post/pack purchase button html only, design purpose
+	
+6>	mgm_generate_register_form_template
+
+    @filesource hooks/mgm_user_hooks.php
+    @line 168
+   
+    @param array $register_form_params
+	@return sting 
+	
+	@desc generate default template, this allows to disable it using filters
+	
+7>  mgm_register_form_template
+
+    @filesource hooks/mgm_user_hooks.php
+    @line 171
+	
+	@param the default content
+	@return sting
+	
+	@desc get template filter, this allows to customize mgm_register_form_template for custom, mgm_register_form_template_wordpress for wordpress
+			
+8>  mgm_generate_register_form_html
+
+    @filesource hooks/mgm_user_hooks.php
+	@line 174
+	
+    @param string $form_template
+    @param array $register_form_params
+    @return string $form_html 
+	
+	@desc  generate html with elements, this allows to disable as add custom generator	
+	
+9> mgm_register_form_additional_html
+
+    @filesource hooks/mgm_user_hooks.php
+	@line 177
+	
+	@param string $form_html
+	@return string
+	
+	@desc  apply additional filter	
+	
+10> mgm_register_form_row_template
+
+	@filesource hooks/mgm_user_hooks.php (multiple files)
+	@line 232
+	
+	@param the default content
+	@return array
+	
+	@desc  get template row filter, mgm_register_form_row_template for custom, mgm_register_form_row_template_wordpress for wordpress
+	
+11> user_registration_email
+    
+	@filesource hooks/mgm_user_hooks.php (multiple file)
+	@line 492
+	
+	@param array $_POST['user_email']
+	@return string $user_email
+	
+	@desc
+	
+12> mgm_bp_register_url	
+
+    @filesource hooks/mgm_user_hooks.php
+	@line 949  (multiline)
+	
+	@param string $redirect
+	@return string $redirect
+	
+	@desc buddypress url replace by register url
+
+13> mgm_new_user_notification_email_template
+
+    @filesource hooks/mgm_user_hooks.php
+	@line 1211
+	
+	@param unknown $template
+	@param int $user_id
+	@return unknown $template
+	
+	@desc   	
+	
+14> disable_jqueryon_page
+
+    @filesource hooks/mgm_user_hooks.php
+	@line 1295
+	
+	@param boolean $disable_jquery
+	@return boolean
+	
+	@desc this is for blocking loading jquery externally, to disable jquery add_filter and modify disable_jquery to return true 
+	
+15> mgm_login_redirect
+
+	@filesource hooks/mgm_user_hooks.php
+	@line 1423
+	
+	@param string user login redirect url
+	@return string
+	
+	@desc redirect check
+	
+16> password_reset_title
+    
+	@filesource hooks/mgm_user_hooks.php
+	@line 1552
+	
+	@param mixed string/array
+	@return string
+	
+	@desc reset password and get custom title
+	
+17> password_reset_message	
+			
+   	@filesource hooks/mgm_user_hooks.php
+	@line 1553
+	
+	@param mixed
+	@param string $new_pass
+	@return string
+	
+	@desc reset password and get custom messages
+	
+18>	mgm_reassign_member_subscription
+    
+	@filesource hooks/mgm_user_hooks.php (multifile)
+	@line 1553 (multiline)
+	
+	@param int $user_id
+	@param obj $member
+	@param string EXPIRE
+	@param boolean false
+	@return obj depending on $return value
+	
+	@desc This happens when user tries login for the first time after expiry date reached
+
+19> mgm_login_form
+
+   	@filesource libs/functions/mgm_forms.php (multiple files)
+	@line 104 (multiline)
+	
+	@param string $html
+	@return
+	
+	@desc
+	
+20> mgm_login_form_buttons_sep	
+	
+	@filesource libs/functions/mgm_forms.php
+	@line 116 (multiline)
+	
+	@param unknown
+	@return array
+	
+	@desc
+	
+21>	mgm_login_form_buttons
+	
+	@filesource libs/functions/mgm_forms.php
+	@line 116 (multiline)
+	
+	@param the login button $buttons
+	
+	@desc   modify and allow adding more custom 3rd party login buttons, primarily developed for facebook connect
+	      later will be reused to add more social login
+		  
+22> mgm_login_form_after_links_sep		  
+	
+	@filesource libs/functions/mgm_forms.php
+	@line 150 (multiline)
+	
+	@param string | separator
+	
+	@desc
+	
+23> mgm_login_form_after_links
+
+    @filesource libs/functions/mgm_forms.php
+	@line 150(multiline)	
+	
+	@param the default register/password recover links
+	
+    @desc modify and allow adding more custom 3rd party links to default login page links	
+	
+24> mgm_login_form_inline_script
+
+    @filesource libs/functions/mgm_forms.php
+	@line 165  (multiline)
+	
+	@param string  $script
+	
+	@desc
+	
+25> mgm_login_form_scripts
+
+    @filesource libs/functions/mgm_forms.php
+	@line 168 
+	
+	@param string  $script
+	
+	@desc	
+	
+26> mgm_login_form_inline_style	
+    
+	@filesource libs/functions/mgm_forms.php
+	@line 173
+	
+	@param string  $style
+	
+	@desc
+	
+27> mgm_login_form_styles
+
+    @filesource libs/functions/mgm_forms.php
+	@line 176
+	
+	@param string  $style
+	
+	@desc
+	
+28>	mgm_login_form_html	
+
+    @filesource libs/functions/mgm_forms.php
+	@line 179
+	
+	@param string $html
+	@return mixed
+	
+	@desc
+	
+29>	mgm_sidebar_login_form_html
+
+    @filesource libs/functions/mgm_forms.php
+	@line 282
+	
+	@param string $html
+	@return mixed
+	
+	@desc
+	
+30> mgm_register_form_row_template
+
+    @filesource libs/functions/mgm_forms.php
+	@line 392
+	
+	@param the default content
+	@return array
+	
+	@desc get template row filter, mgm_register_form_row_template for custom, mgm_register_form_row_template_wordpress for wordpress
+	
+31> mgm_guest_purchase_register_form_pre_register_html
+    
+	@filesource libs/functions/mgm_forms.php
+	@line 406
+	
+	@param int ((int)$_GET['post_id']
+	@param string pre_register
+	
+	@desc
+	
+32> mgm_register_button_text
+
+    @filesource libs/functions/mgm_forms.php 
+	@line 453(multiline)
+	
+	@param object $system_obj
+	
+	@desc register button text
+	
+33> mgm_register_form_buttons_sep
+
+    @filesource libs/functions/mgm_forms.php
+	@line 459
+	
+	@param string &nbsp as a spce separator
+	@return string
+	
+	desc
+	
+34> mgm_register_form_buttons
+
+    @filesource libs/functions/mgm_forms.php
+	@line 459
+	
+	@param unknown $buttons
+	
+	@desc
+	
+35>	mgm_register_form
+
+    @filesource libs/functions/mgm_forms.php 
+	@line 474 (multiline)
+	
+	@param string $form_html
+	
+	@desc
+	
+36> mgm_register_form_after_links_sep
+
+    @filesource libs/functions/mgm_forms.php
+	@line 497
+	
+	@param  string | separator
+	
+	@desc
+	
+37> mgm_register_form_after_links
+
+    @filesource libs/functions/mgm_forms.php
+	@line 497	
+	
+	@param string $links
+	
+	@desc
+	
+38> mgm_register_form_inline_script
+
+    @filesource libs/functions/mgm_forms.php
+	@line 517
+	
+	@param string $script
+	
+	@desc
+	
+39> mgm_register_form_scripts
+
+    @filesource libs/functions/mgm_forms.php
+	@line 520
+	
+	@param string $script
+	
+	@desc
+	
+40>	mgm_register_form_inline_style
+
+    @filesource libs/functions/mgm_forms.php
+	@line 525
+	
+	@param string $style
+	
+	@desc
+	
+41>	mgm_register_form_styles
+
+    @filesource libs/functions/mgm_forms.php
+	@line 528
+	
+	@param string $style
+	
+	@desc
+	
+42> mgm_register_form_html
+
+    @filesource libs/functions/mgm_forms.php
+	@line 531
+	
+	@param string $html
+	
+	@desc
+	
+43> mgm_sidebar_register_form_html
+
+    @filesource libs/functions/mgm_forms.php
+	@line 623
+	
+	@param string $html
+	@return mixed
+	
+	@desc
+	
+44> mgm_lostpassword_success_message
+
+    @filesource libs/functions/mgm_forms.php
+	@line 666
+	
+	@param
+	
+	@desc
+	
+45> mgm_lostpassword_form
+
+    @filesource libs/functions/mgm_forms.php
+	@line 688
+	
+	@param string  $html
+	
+	@desc
+	
+46> mgm_lostpassword_form_buttons_sep
+
+    @filesource libs/functions/mgm_forms.php
+	@line 694
+	
+	@param string  &nbsp; as a separator
+	
+	@desc
+
+47>	mgm_lostpassword_form_buttons
+
+	@filesource libs/functions/mgm_forms.php
+	@line 694
+	
+	@param string $buttons
+	
+	@desc
+	
+48>	mgm_lostpassword_form_after_links_sep
+
+    @filesource libs/functions/mgm_forms.php
+	@line 717
+	
+	@param string  as a separator
+	
+	@desc	
+	
+49> mgm_lostpassword_form_after_links
+
+    @filesource libs/functions/mgm_forms.php
+	@line 717
+	
+	@param string $links
+	
+	@desc 
+	
+50> mgm_lostpassword_form_inline_script	
+
+    @filesource libs/functions/mgm_forms.php
+	@line 734
+	
+	@param string $script
+	
+	@desc 	
+
+51> mgm_lostpassword_form_scripts
+
+    @filesource libs/functions/mgm_forms.php
+	@line 737
+	
+	@param string $script
+	
+	@desc 
+	
+52> mgm_lostpassword_form_inline_style
+
+    @filesource libs/functions/mgm_forms.php
+	@line 742
+	
+	@param string $style
+	
+	@desc 
+	
+53>	mgm_lostpassword_form_styles
+
+    @filesource libs/functions/mgm_forms.php
+	@line 745
+	
+	@param 	string $style
+	
+	@desc
+	
+54> mgm_lostpassword_form_html
+
+    @filesource libs/functions/mgm_forms.php
+	@line 748
+	
+	@param 	string $style
+	
+	@desc
+	
+55> mgm_profile_edit_message
+
+	@filesource libs/functions/mgm_forms.php
+	@line 855
+	
+	@param 	unknown
+	
+	@desc
+	
+56> mgm_profile_form_row_template			
+    
+	@filesource libs/functions/mgm_forms.php
+	@line 863
+	
+	@param 	the default content
+	
+	@desc mgm_profile_form_row_template for row on public profile page
+	
+57> mgm_profile_form_template	
+
+    @filesource libs/functions/mgm_forms.php
+	@line 1012
+	
+	@param 	the default content
+	
+	@desc mgm_profile_form_template for row on public profile page
+
+58> mgm_profile_form_button	
+
+    @filesource libs/functions/mgm_forms.php
+	@line 1241
+	
+	@param 	 the default content
+	
+	@desc mgm_profile_form_button for submit button
+	
+59> mgm_user_login_pre_process	
+
+    @filesource libs/functions/mgm_forms.php
+	@line 1265
+	
+	@param 	 the default content	 
+	
+	@desc 
+	
+60> mgm_get_currency
+
+    @filesource libs/functions/mgm_misc_functions.php
+	@line 3547
+	
+	@param array $currencies
+	@return array	 
+	
+	@desc
+	
+61> mgm_get_currency_symbol	
+
+    @filesource libs/functions/mgm_misc_functions.php
+	@line 3564
+	
+	@param array $symbols	 
+	
+	@desc get html symbol for given currency
+	
+62> mgm_get_currency_iso4217
+
+    @filesource libs/functions/mgm_misc_functions.php
+	@line 3582
+	
+	@param array $currencies	 
+	
+	@desc get currencies iso 4217 codes list
+	
+63> mgm_get_locale
+
+    @filesource libs/functions/mgm_misc_functions.php
+	@line 3615
+	
+	@param array $locales	
+	@return array 
+	
+	@desc get locales list
+	
+64> mgm_get_language
+
+    @filesource libs/functions/mgm_misc_functions.php
+	@line 3629
+	
+	@param array $languages	
+	@return array 
+	
+	@desc get languages list
+	
+65> mgm_registration_user_login_sanitized
+
+    @filesource libs/functions/mgm_misc_functions.php
+	@line 4459
+	
+	@param string sanitize_user( $user_login )
+	
+	@desc  registering a new user login sanitize username stripping out unsafe characters.
+
+66> registration_errors
+
+    @filesource libs/functions/mgm_misc_functions.php
+	@line 4465
+	
+	@param int $errors
+	@param string $sanitized_user_login
+	@param string $user_email
+	
+	@desc generate a error if registration failed
+	
+67>	login_errors
+
+    @filesource libs/functions/mgm_misc_functions.php
+	@line 4532
+	
+	@param string 
+	
+	@desc  generate a error if login failed
+	
+68> login_messages	
+
+    @filesource libs/functions/mgm_misc_functions.php
+	@line 4534
+	
+	@param string 
+	
+	@desc  generate a message after login
+	
+69> allow_password_reset
+
+    @filesource libs/functions/mgm_misc_functions.php
+	@line 4627
+	
+	@param boolean 
+	@param int $user_data->ID 
+	
+	@desc  redefining user_login ensures we return the right case  in the email
+	
+70> retrieve_password_title	
+  
+    @filesource libs/functions/mgm_misc_functions.php
+	@line 4644
+	
+	@param string $title
+	
+	@desc  redefining user_login ensures we return the right case  in the email
+	
+71> retrieve_password_message
+
+    @filesource libs/functions/mgm_misc_functions.php
+	@line 4649
+	
+	@param string $message
+	@param string $key
+	
+	@desc  redefining user_login ensures we return the right case  in the email
+	
+72> mgm_validate_reset_password	
+
+    @filesource libs/functions/mgm_misc_functions.php
+	@line 4751
+	
+	@param string $_GET['key']
+	@param string $_GET['login']
+	
+	@desc  
+	
+73> login_redirect
+
+    @filesource libs/functions/mgm_misc_functions.php
+	@line 4814
+	
+	@param string $redirect_to
+	@param string $user
+	
+	@desc redirect to login
+	
+74>	mgm_custom_pages
+
+    @filesource libs/functions/mgm_misc_functions.php
+	@line 4884
+	
+	@param array $pages
+	@return array $pages
+	
+	@desc get custom pages
+	
+75> mgm_guest_purchase_post_form_pre_button_html
+
+    @filesource libs/functions/mgm_misc_functions.php
+	@line 6811
+	
+	@param object post 
+	
+	@desc 
+	
+76> mgm_user_subscription_html
+
+    @filesource libs/functions/mgm_template_functions.php
+	@line 265
+	
+	@param the default content
+	@param int $user->ID
+	
+	@desc user subscription / membership details
+	
+77> mgm_other_subscriptions_html
+
+    @filesource libs/functions/mgm_template_functions.php
+	@line 427
+	
+	@param the default content
+	@param int $user->ID
+	
+	@desc  other subscription / membership details
+	
+78> mgm_membership_details_html
+
+    @filesource libs/functions/mgm_template_functions.php
+	@line 501
+	
+	@param the default content
+	@param int $user->ID
+	
+	@desc  membership details
+	
+79> mgm_membership_contents_html
+
+    @filesource libs/functions/mgm_template_functions.php
+	@line 1143
+	
+	@param the default content
+	
+	@desc  membership contents details
+	
+80> mgm_posts_for_membership_html	
+
+    @filesource libs/functions/mgm_template_functions.php
+	@line 1297
+	
+	@param the default content
+	
+	@desc   posts for membership level details	
+	
+81> mgm_user_payment_history_html
+
+    @filesource libs/functions/mgm_template_functions.php
+	@line 1625
+	
+	@param the default content
+	
+	@desc  user payment history details	
+	
+82> mgm_payment_subscribe_page_title
+
+    @filesource libs/functions/mgm_theme_functions.php
+	@line 41
+	
+	@param string $page_title
+	
+	@desc  payment subscription page title details
+	
+83> mgm_payment_subscribe_page_html
+
+    @filesource libs/functions/mgm_theme_functions.php
+	@line 86
+	
+	@param the default content
+	
+	desc  modify payment subscribe page html, design purpose
+	
+84> mgm_payment_processing_page_title
+
+    @filesource libs/functions/mgm_theme_functions.php
+	@line 112
+	
+	@param mixed(array|string) $title
+	
+	@desc  modify payment processing page title	
+	
+85>	mgm_payment_processing_page_title
+
+    @filesource libs/functions/mgm_theme_functions.php
+	@line 132
+	
+	@param the default content
+	
+	@desc  modify payment processing html, design purpose
+	
+86> mgm_payment_processed_page_title
+
+    @filesource libs/functions/mgm_theme_functions.php
+	@line 165
+	
+	@param mixed(array|string) $title 
+	
+	@desc  modify payment processed page title
+	
+87> mgm_register_redirect
+ 
+    @filesource libs/functions/mgm_theme_functions.php
+	@line 227
+	
+	@param string $redirect_url
+	
+	@desc  alteretion
+	
+89> mgm_payment_processed_page_html	
+
+    @filesource libs/functions/mgm_theme_functions.php
+	@line 303
+	
+	@param the default content
+	
+	@desc  modify payment processed html, design purpose
+	
+90> mgm_post_purchase_page_title	
+
+    @filesource libs/functions/mgm_theme_functions.php
+	@line 315
+	
+	@param string
+	
+	@desc  post purchase page title 
+	
+91>  mgm_post_purchase_page_html	
+
+    @filesource libs/functions/mgm_theme_functions.php
+	@line 330
+	
+	@param the default content
+	
+	@desc modify post purchase page html, design purpose
+	
+92>  mgm_get_register_page_title	
+
+    @filesource libs/functions/mgm_theme_functions.php
+	@line 342
+	
+	@param string
+	
+	@desc register page title
+	
+93> mgm_register_page_html	
+
+    @filesource libs/functions/mgm_theme_functions.php
+	@line 357
+	
+	@param @string: default html 
+	
+	@desc modifies regsiter page html ( custom page )
+	
+94> mgm_user_profile_page_title	
+
+    @filesource libs/functions/mgm_theme_functions.php
+	@line 369
+	
+	@param string
+	
+	@desc  user profile page title
+	
+95> mgm_user_profile_page_html
+
+    @filesource libs/functions/mgm_theme_functions.php
+	@line 384
+	
+	@param @string: default html 
+	
+	@desc  user profile page html, design purpose
+	
+96>	mgm_lost_password_page_title
+
+    @filesource libs/functions/mgm_theme_functions.php
+	@line 396
+	
+	@param string 
+	
+	@desc  lost password page title
+	
+97> mgm_lost_password_page_html	
+
+    @filesource libs/functions/mgm_theme_functions.php
+	@line 411
+	
+	@param @string: default html 
+	
+	@desc  lost password page html, design purpose
+	
+98>	mgm_user_login_page_title
+
+    @filesource libs/functions/mgm_theme_functions.php
+	@line 423
+	
+	@param string
+	
+	@desc   user login page title
+	
+99> mgm_user_login_page_html	
+
+    @filesource libs/functions/mgm_theme_functions.php
+	@line 438
+	
+	@param @string: default html 
+	
+	@desc   user login page html, design purpose
+	
+100> mgm_guest_purchase_page_title	
+     
+	@filesource libs/functions/mgm_theme_functions.php
+	@line 450
+	
+	@param string 
+	
+	@desc   guest purchase page title
+
+101> mgm_guest_purchase_page_html
+
+    @filesource libs/functions/mgm_theme_functions.php
+	@line 465
+	
+	@param @string: default html 
+	
+	@desc  modify guest purchase page html, design purpose
+	
+102> mgm_page_template
+
+    @filesource libs/functions/mgm_theme_functions.php
+	@line 506 (multiline)
+	
+	@param template
+	@param name of custom page i.e. registe 
+	
+	@desc   modify template being loaded for custom page  
+	
+103> post_purchase_addon_options_html
+
+    @filesource libs/helpers/mgm_addon_helper.php
+	@line 207 
+	
+	@param @string: addon options html
+	
+	@desc   addon purchase users html, design purpose
+	
+104> register_addon_options_html
+
+    @filesource libs/helpers/mgm_addon_helper.php
+	@line 229 
+	
+	@param @string: addon options html
+	
+	@desc   addon register users html, design purpose	
+	
+105> mgm_autoresponder_headers
+
+    @filesource libs/components/mgm_autoresponder.php
+	@line 353  (multiline)
+	
+	@param string $headers
+	@param object $this->code
+	
+	@desc   default action autoresponder headers 
+	
+106> mgm_cc_form_html 
+
+    @filesource libs/components/mgm_payment.php (multifile)
+	@line 1368 
+	
+	@param @string: default html
+	
+	@desc   modifies credit card payment form html
+	
+107> get_subscription_name
+
+    @filesource libs/classes/mgm_system.php
+	@line 338 
+	
+	@param @string: $subscription_name
+	
+	@desc   get subscription name 
+	
+108> mgm_payment_button_data
+
+	@filesource core/modules/payment/mgm_1shoppingcart.php (multifile)
+	@line 487 
+	
+	@param string $data
+	@param int $tran_id
+	@param string $module
+	@param array $pack
+	
+	@desc filters payment button data, can be used to alter data being sent to gateway
+	
+109> mgm_reassign_member_subscription
+
+	@filesource core/modules/payment/mgm_1shoppingcart.php (multifile)
+	@line 1123 
+	
+	@param int $user_id
+	@param string $member
+	@param CANCEL
+	@param boolean
+	
+	@desc reassign expiry membership pack if exists
+	
+110> mgm_sidebar_widget_text_title	
+
+    @filesource core/widgets/sidebar/widget_text.php
+	@line 54 
+	
+	@param @string: title
+	
+	@desc modifies text widget title
+	
+111> mgm_sidebar_widget_text_text
+
+	@filesource core/widgets/sidebar/widget_text.php
+	@line 55 
+	
+	@param  @string: text
+	
+	@desc modifies text widget body text
+	

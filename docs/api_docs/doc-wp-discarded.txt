@@ -1,0 +1,46 @@
+1> check_passwords
+  
+   @filesource hooks/mgm_content_hooks.php
+   @line 1874
+   
+   @type: action
+   
+   @param @array: array ( $user->user_login, & $pass1, & $pass2 ) 
+   
+   @desc checking the password has been typed twice, Wordpresss default @see http://adambrown.info/p/wp_hooks/hook/check_passwords
+   
+2> user_profile_update_errors   
+   
+   @filesource hooks/mgm_content_hooks.php
+   @line 1983
+   
+   @type: action
+   
+   @param @array: array ( &$errors, $update, &$user )
+   
+   @desc Allow plugins to return their own errors, Wordpresss default @see http://adambrown.info/p/wp_hooks/hook/user_profile_update_errors
+   
+12> password_reset
+
+   @filesource hooks/mgm_user_hooks.php
+   @line 1548
+   
+   @type: action
+   
+   @param $user
+   @param $new_pass
+   
+   @desc reset password, Wordpress default @see http://adambrown.info/p/wp_hooks/hook/password_reset
+   
+15> personal_options_update
+
+   @filesource libs/functions/mgm_forms.php
+   @line 820
+   
+   @type: action
+   
+   @param int  $current_user->ID
+   
+   @desc process hooked update, Wordpress default 
+   
+   @see http://adambrown.info/p/wp_hooks/hook/personal_options_update

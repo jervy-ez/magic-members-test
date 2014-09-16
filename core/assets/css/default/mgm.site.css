@@ -1,0 +1,8 @@
+/* CSS Document */
+.mgm_aff_footer{ margin-bottom:20px}
+.mgm_aff_link{ float:right; margin-right:145px; }
+.mgm_aff_link a{ color:#000000; text-decoration:none; font-size:14px; font-style:oblique; font-weight:bold}
+.mgm_aff_link a:hover{ text-decoration:underline;}
+.mgm_aff_clearfix{clear:both}
+
+.mgm-no-module{color: red;}

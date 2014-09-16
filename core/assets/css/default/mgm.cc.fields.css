@@ -1,0 +1,126 @@
+/* CSS Document */
+
+.ccfields p {
+	margin-bottom: 0;
+}
+
+.ccfields label {
+	color: #777;
+	font-size: 13px;
+	font-weight:bold;
+	line-height:18px;
+	padding:5px 0 5px 0;
+}
+
+.ccfields input.input, .ccfields select {
+	font-size: 24px;
+	width: 97%;
+	padding: 3px;
+	margin-top: 2px;
+	margin-right: 6px;
+	margin-bottom: 16px;
+	border: 1px solid #e5e5e5;
+	background: #fbfbfb;
+	color: #555;
+}
+
+.ccfields input#mgm_card_expiry_month,
+.ccfields input#mgm_card_expiry_year,
+.ccfields input#mgm_card_code{
+	width:20%;
+}
+
+.ccfields input.button {
+	/*font-family: "Lucida Grande", Verdana, Arial, "Bitstream Vera Sans", sans-serif;
+	padding: 3px 10px;
+	border: none;
+	font-size: 12px;
+	font-weight:bold;
+	border-width: 1px;
+	border-style: solid;
+	-moz-border-radius: 11px;
+	-khtml-border-radius: 11px;
+	-webkit-border-radius: 11px;
+	border-radius: 11px;
+	cursor: pointer;
+	text-decoration: none;
+	margin-top: -3px;
+	width:40%;
+	height:25px;*/
+}
+
+.ccfields label.invalid, .ccfields div.invalid {	
+	color:#b50007;	
+	margin-left:0px; 
+	margin-top:5px; 
+	width: auto; 	
+	display:block; 
+	font-weight:bold;	
+	font-size:12px;	
+	text-align:justify;	
+	width:auto;
+}
+
+.ccfields label.valid, .ccfields div.valid {
+	color:#1c8400;	
+	margin-left:0px; 
+	margin-top:5px; 
+	width: auto; 	
+	display:block; 
+	font-weight:bold;	
+	font-size:12px;	
+	text-align:justify;	
+	width:auto;
+}
+
+.ccfields .required{ 
+	color:#FF0000;
+}
+
+.ccfields .success, .ccfields .error, .ccfields .notes, .ccfields .tips, .ccfields .failure{
+	color:#693434;
+	border-width: 1px;
+	border-style: solid;
+	padding: 5px;
+	margin: 5px 15px 2px;
+	-moz-border-radius: 3px;
+	-khtml-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	background-color: #ffffe0;
+	border-color: #e6db55;
+	height:auto;width:90%;
+}
+
+.ccfields .running{
+	background:url(../../images/ajax/fb-loader.gif) 5px 12px no-repeat;
+	vertical-align:middle;
+	text-align:justify;
+	padding:10px;
+}
+
+.ccfields .running span{
+	margin-left:20px;
+}
+
+.ccfields_pack_desc{
+	height:30px; 
+	font-weight:bold;
+	text-align: center;	
+}
+
+.ccfields_block_left{
+	display:block; 
+	text-align:left;
+}
+
+.ccfields .width70px {
+	width:70px;
+}
+
+.ccfields .width100px {
+	width:100px;
+}
+.ccfields .width250px {
+	width:250px;
+}

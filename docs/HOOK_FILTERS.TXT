@@ -1,0 +1,530 @@
+- MGM ACTION HOOKS and FILTER HOOKS
+
+
+---- ACTION HOOKS ( @uses add_action('action_name') )--------------------------------------------------------------------
+
+1. mgm_user_register 
+   
+	type: action 	
+	
+	desc: runs after user registration is done and user is redirected topayment page
+	
+	args:  @int: user_id
+	
+	file: hooks/hooks/user_hooks.php
+  
+2. mgm_membership_subscription_cancelled
+
+	type: action 
+	
+	desc: runs after any subscription cancelled
+	
+	args: @array: array('user_id' => $user_id) 
+  
+3. mgm_additional_code
+	
+	type: action 
+	
+	desc: captured any additional button data passed to payment form before form is generated
+	
+	args: none
+  
+4. mgm_buy_post_transaction_success, mgm_post_purchase_payment_success
+	
+	type: action 
+	
+	desc: runs after any post purchase successfully completes
+	
+	args: @array: array('post_id' => $post_id) 
+  
+5. mgm_membership_transaction_success, mgm_subscription_purchase_payment_success
+	
+	type: action 
+	
+	desc: runs after any subscription purchase successfully completes
+	
+	args: @array: array('user_id' => $user_id) 	
+  
+6. mgm_return_[module name ] , mgm_return_subscription_payment_[module name] e.g. mgm_return_subscription_payment_2checkout
+	
+	type: action 
+	
+	desc: runs after each module is processed its payment callback, success/failure both
+	
+	args: @array: array('user_id' => $user_id) 
+  
+6. mgm_return_post_purchase_payment_[module name] e.g. mgm_return_post_purchase_payment_2checkout
+	
+	type: action 
+	
+	desc: runs after each module is processed its payment callback, success/failure both
+	
+	args: @array: array('post_id' => $post_id) 
+
+7. mgm_user_register_pre_process		
+	
+	type: action 
+	
+	desc: process more custom 3rd party register before default register processing, primarily developed for facebook connect
+		  later will be reused to add more social register process
+	
+	args: none
+	
+	file: core/libs/functions/mgm_misc_functions.php 
+	
+
+8. mgm_parse_query_pre_process		
+	
+	type: action 
+	
+    desc: process query in parse query callback
+	
+	args: none
+	
+	file: core/hooks/mgm_query_hooks.php 			
+	
+	
+9. mgm_url_router_pre_process		
+
+	type: action 
+	
+    desc: process url router in parse url router callback
+	
+	args: none
+	
+	file: core/hooks/mgm_query_hooks.php 	   
+   
+10. mgm_user_login_pre_process		
+	
+	type: action 
+	
+    desc: process more custom 3rd party login before default login processing, primarily developed for facebook connect
+	      later will be reused to add more social login process
+	
+	args: none
+	
+	file: core/libs/functions/mgm_misc_functions.php 
+	
+
+11. mgm_user_status_change
+
+	type: action
+	
+	desc: on each ocassion of user status change, this is executed
+	
+	args: user_id, new_status, old_status, context, pack_id
+	
+	file: multiple	
+
+12. mgm_rebill_status_change
+
+	type: action
+	
+	desc: on each ocassion of user rebill status change, this is executed
+	
+	args: user_id, new_status, old_status, context 
+	      ( context= query when triggered by MGM using daily cron, notify= when triggered by gateway via post back )
+	
+	file: multiple
+	   
+=======================================================================================================================   
+  
+---- FILTER HOOKS ( @uses add_filter('filter_name') )----------------------------------------------------
+
+1. mgm_powered_by
+	
+	type: filter 
+
+   desc: update powered by text in template footer, to position the text, add tag <?php do_action( 'mgm_footer_credits' ); ?> in template file or call 
+         <?php mgm_print_footer_credits();?>, this will disable the auto placement and add powered by in position you want.
+   
+   args: @string: default content and magicmembers link 
+   
+   file: hooks/hooks/contents_hooks.php
+   
+2. mgm_payment_processed_html
+	
+	type: filter 
+ 
+   desc: modifies after payment default message display html
+   
+   args: @string: default html   
+   
+   file: html/payment_processed.php
+   
+3. mgm_register_page_html
+	
+	type: filter 
+
+   desc: modifies regsiter page html ( custom page )
+   
+   args: @string: default html 
+   
+   file: html/register_page.php   
+
+4. mgm_login_form_html
+
+	type: filter 
+
+   desc: modifies login form html
+   
+   args: @string: default html 
+   
+   file: libs/functions/mgm_misc_functions.php
+   
+5. mgm_login_link_html
+
+	type: filter 
+ 
+   desc: modifies login link html
+   
+   args: @string: default html 
+   
+   file: libs/functions/mgm_misc_functions.php
+   
+6. mgm_lostpassword_link_html   
+
+	type: filter 
+
+   desc: modifies lost password link html
+   
+   args: @string: default html 
+   
+   file: libs/functions/mgm_misc_functions.php
+   
+7. mgm_user_register_form_html
+
+	type: filter 
+
+   desc: modifies register form html
+   
+   args: @string: default html 
+   
+   file: libs/functions/mgm_misc_functions.php
+   
+8. mgm_user_has_access_additional
+
+	type: filter 
+
+   desc: after process user access check bu member 
+   
+   args: @boolean: processed access
+         @int: $post_id
+		 @int: $user_id
+		 @int: $allow_on_purchasable
+   
+   file: libs/functions/mgm_misc_functions.php
+   
+9. mgm_sidebar_widget_text_title
+	
+	type: filter 
+
+   desc: modifies text widget title
+   
+   args: @string: title
+   
+   file: widgets/widgets/sidebar_widgets.php
+   
+10. mgm_sidebar_widget_text_text      
+
+	type: filter 
+
+     desc: modifies text widget body text
+   
+     args: @string: text
+   
+     file: widgets/widgets/sidebar_widgets.php
+	 
+11. mgm_cc_form_html
+
+	type: filter 
+
+    desc: modifies credit card payment form html 
+	
+	args: @string: default html
+	
+	file: libs/components/mgm_payment.php	 	
+	
+12. post_purchase_button_html
+
+	type: filter 
+
+    desc: modify post/pack purchase button html only, design purpose
+	
+	args: the button content
+	
+	file: hooks/hooks/content_hooks.php 	
+
+13. mgm_attach_scripts
+
+	type: filter 
+
+	desc: attach js/css from mgm to specific pages/areas
+	
+	args: nothing
+	
+	file: hooks/hooks/user_hooks.php 
+		
+
+14. mgm_payment_subscribe_page_html
+
+	type: filter 
+
+	desc: modify payment subscribe page html, design purpose
+	
+	args: the default content
+	
+	file: html/payment_subscribe.php 
+	
+	
+14. mgm_payment_processing_page_html
+
+	type: filter 
+
+	desc: modify payment processing html, design purpose
+	
+	args: the default content
+	
+	file: html/payment_processing.php 	
+	
+15. mgm_download_image_button		
+
+	type: filter 
+
+	desc: modify download button image, design purpose
+	
+	args: the default button image and title
+	
+	file: libs/functions/mgm_functions.php 
+	
+16. mgm_register_form_row_template, mgm_register_form_row_template_wordpress
+
+	type: filter 
+
+    desc: mgm_register_form_row_template for row, mgm_register_form_row_template_wordpress for row on wordpress page
+	
+	args: the default content
+	
+	file: hooks/hooks/user_hooks.php
+
+17. mgm_register_form_template, mgm_register_form_template_wordpress
+
+	type: filter 
+
+	desc: mgm_register_form_template for full content, mgm_register_form_template_wordpress for full content on wordpress page
+	
+	args: the default content
+	
+	file: hooks/hooks/user_hooks.php
+
+16. mgm_profile_form_row_template, mgm_profile_form_row_template_view
+
+	type: filter 
+
+	desc: mgm_profile_form_row_template for row, mgm_profile_form_row_template_view for row on public profile page
+	
+	args: the default content
+	
+	file: hooks/hooks/content_hooks.php
+
+16. mgm_profile_form_template, mgm_profile_form_template_view	
+
+	type: filter 
+
+	desc: mgm_profile_form_template for row, mgm_profile_form_template_view for row on public profile page
+	
+	args: the default content
+	
+	file: hooks/hooks/content_hooks.php
+	
+17. mgm_profile_form_button	
+
+	type: filter 
+
+	desc: mgm_profile_form_button for submit button
+	
+	args: the default content
+	
+	file: hooks/hooks/content_hooks.php
+	
+18. mgm_user_subscription_html
+
+	type: filter 
+
+	desc: user subscription / membership details
+	
+	args: the default content, user id
+	
+	file: core/libs/functions/mgm_template_functions.php
+
+    	
+19. mgm_notify_pre_process_[module name]
+
+	type: filter 
+   
+    desc: before processing payment data sent from gateway
+	
+	args: tran_id = transaction id of the payment, custom = custom parameter / passthrough from payment gateway
+	
+	file: modules/payment
+	
+20. mgm_notify_post_process_[module name]
+
+	type: filter 
+   
+    desc: after processing payment data sent from gateway
+	
+	args: tran_id = transaction id of the payment, custom = custom parameter / passthrough from payment gateway
+	
+	file: modules/payment	
+
+21. mgm_notify_post_process_unverified_[module name]
+
+	type: filter 
+
+	desc: after processing payment data sent from gateway, data not verified
+	
+	args: none
+	
+	file: modules/payment	
+	
+22. mgm_post_update
+
+	type: filter 
+ 
+    desc: modifies after payment default message display html
+   
+    args: @param object mgm_post class object
+	      @param int post id
+		  @return object mgm_post class object
+   
+    file: widgets/mgm_widget_post_category.php	
+	
+
+23. mgm_guest_purchase_page_title	
+
+	type: filter 
+
+    desc: modify guest purchase page title, design purpose
+	
+	args: the default title
+	
+	file: core/libs/functions/mgm_theme_functions.php 
+	
+24. mgm_guest_purchase_page_html	
+
+	type: filter 
+
+    desc: modify guest purchase page html, design purpose
+	
+	args: the default html
+	
+	file: core/libs/functions/mgm_theme_functions.php 
+	
+	
+25. mgm_guest_purchase_post_form_pre_button_html	
+
+	type: filter 	
+	
+    desc: modify guest purchase post form message html, design purpose
+	
+	args: the default html
+	
+	file: core/libs/functions/mgm_misc_functions.php 		
+	
+	
+26. mgm_logout_links
+    
+	type: filter 
+	
+    desc: modify and allow adding more custom 3rd party logout links to default logout link, 
+	      primarily developed for facebook connect and can be directly called to place button anywhere 
+		  
+		  i.e. mgm_facebook_logout_link() 
+		  
+		  or just define new filter and add to the same callback, ability for designer to place logout link any place 
+	
+	args: the default logout link placed in top menu
+	
+	file: core/hooks/mgm_content_hooks.php 	
+	
+
+27. mgm_login_form_buttons		
+	
+	type: filter 
+	
+    desc: modify and allow adding more custom 3rd party login buttons, primarily developed for facebook connect
+	      later will be reused to add more social login
+	
+	args: the login button
+	
+	file: core/libs/functions/mgm_misc_functions.php 
+			
+
+28. mgm_login_form_after_links
+    
+	type: filter 
+	
+    desc: modify and allow adding more custom 3rd party links to default login page links		  
+	
+	args: the default register/password recover links
+	
+	file: core/libs/functions/mgm_misc_functions.php 
+	
+	
+	
+	
+	
+29. mgm_register_form_buttons		
+	
+	type: filter 
+	
+    desc: modify and allow adding more custom 3rd party register buttons, primarily developed for facebook connect
+	      later will be reused to add more social register
+	
+	args: the register button
+	
+	file: core/libs/functions/mgm_misc_functions.php 	
+	
+
+30. mgm_register_form_after_links
+    
+	type: filter 
+	
+    desc: modify and allow adding more custom 3rd party links to default register page links		  
+	
+	args: the default login/password recover links
+	
+	file: core/libs/functions/mgm_misc_functions.php	
+
+
+31. mgm_payment_button_data
+
+	type: filter 
+	
+    desc: filters payment button data, can be used to alter data being sent to gateway
+	
+	args: array $data, int $tran_id, string $module, array $pack
+	
+	file: core/module/payment/<module>
+	
+32. mgm_custom_pages
+
+	type: filter 
+	
+    desc: add new custom page	  
+	
+	args: pages array
+	
+	file: core/libs/functions/mgm_misc_functions.php
+	
+33. mgm_page_template
+
+	type: filter 
+	
+    desc: modify template being loaded for custom page  
+	
+	args: template, name of custom page i.e. register 
+	
+	file: core/libs/functions/mgm_theme_functions.php	
+    	

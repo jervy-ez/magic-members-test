@@ -1,0 +1,10 @@
+/* wp3.3+ admin css fix */
+
+.form-field input[type="radio"],.form-field input[type="checkbox"],.form-field input.radio{
+	width:auto;
+	border:1px solid #FF0000;
+}
+
+/*fixed for wp 3.3+*/
+#mgm-panel-content ul.tabs { top: -45px; left: }
+

@@ -1,0 +1,226 @@
+list of mgm shortcodes
+
+Contents Tags [to be used in post/page content]:
+--------------------------------------------------
+
+1.  private     
+       
+	   usage : [private] content [/private]  
+	   desc  : protect contents that is set as not acciessible by current member, for example, two membership types "Member" and "Gold Member",
+	           when tag is in use in a Post/Page and access is allowed to only "Gold Member", "Member" users can not access the content.
+			   setting can be extended by post setup meta box "Magic Members", make the post purchable for "Members" who does not have access.  
+	
+2.  private_or
+	
+		usage : [private_or#123][/private_or] : 123 = post_id
+		desc  : Content inside private tags is protected. Only users with account types selected 
+				on the page or in the tag being able to access content. (User has to have the selected 
+				membership level or he has to have access to a specific post). If a user does not have 
+				access they are shown an error message same as regular private tag.
+
+3.  private_and
+		
+		usage : [private_and#123][/private_and] : 123 = post_id
+		desc  : Content inside private tags is protected. Only users with account types selected 
+				on the page and in the tag being able to access content (User has to have the selected 
+				membership level and at the same time he has to have access to a specific post 
+				possibly a ppp, but doesn't matter)). If a user does not have access 
+				they are shown an error message same as regular private tag.
+				
+
+4.  user_profile [old mgm_profile]
+
+		usage : [user_profile]
+		desc  : shows current user profile, note: the output of old mgm_profile has been shifted to new tag "user_subscription
+
+5.  user_profile_edit    [old mgm_user_profile]
+
+		usage : [user_profile_edit]
+		desc  : allowed current user profile edit
+		
+		note: deprecated, use user_profile instead
+
+6.  user_upgrade    [old mgm_upgrade]  
+
+		usage : [user_upgrade], [user_upgrade package=gold_member#4], [user_upgrade membership=gold_member]
+		desc  : allow current user to upgrade membership type
+
+7.  user_subscribe  [old mgm_subscribe], user_register
+
+		usage : [user_subscribe],[user_register package=gold_member#4], [user_register membership=gold_member]
+		desc  : allow current user to subscribe
+		
+		note  : this may be removed, same as [user_register]
+
+8.  user_has_access
+	
+	usage :  [user_has_access#123] : 123 = post_id
+	desc  : check if the current user has access to certain post
+	note  : if the user does not have access to that post then they will be shown no content at all.
+	
+
+9.  user_account_is
+
+	usage: [user_account_is#member] :  member = membership level
+		   [user_account_is#member|#guest|#free]
+	desc : checks if current user is having membership type as defined (here "member" )
+ 
+10. user_contents_by_membership [old mgm_membership_content]
+	
+	usage: [user_contents_by_membership]
+	desc : lists all contents that the current user has access to.
+	
+11. no_access
+
+	usage : [no_access]
+	desc  : The opposite of private tag, content within this tag will only be shown to users who do not have access 
+			to the private tags. People use these as custom messages for each post.
+	note  : This function already works
+
+12. payperpost_pack [old mgm_ppp_pack]
+
+    usage: [payperpost_pack#1] : 1 = pack_id, packs to be created in MGM -> PayPerPost -> Post Packs, use the id here
+	desc : allow posts/pages contents to be assigned to a pack, created in above link, and sell in one page. 
+
+13. subscription_packs [old mgm_pkgs]
+
+    usage : [subscription_packs]
+    desc  : lists all available subscription packs
+	
+	improvement : allow by name/id pack 
+	
+	
+14. user_register  [new tag]	
+
+	usage : [user_register], [user_register package=code], [user_register membership=code]
+    desc  : shows register form
+	
+	
+15. user_subscription  [new tag]	
+
+	usage : [user_subscription] or [user_subscription#unsubscribe] or [user_subscription unsubscribe=unsubscribe]
+    desc  : shows user subscription, if unsubscribe argument passed it will show unsubscribe button too, output is same as old mgm_profile
+    
+16. lost_password  [new tag]	
+
+	usage : [lost_password]
+    desc  : shows lost password form    
+	
+17. transactions [new tag]
+
+	usage : [transactions]
+    desc  : generates transaction results within the theme
+	
+18. membership_details [new tag]
+
+	usage : [membership_details]
+    desc  : shows membership details, rss token and unsubscribe link   
+	
+19. membership_contents [new tag]
+
+	usage : [membership_contents]
+    desc  : shows membership contents(accessible contents, purchased contents, purchasable contents)  
+      
+20. posts_for_membership
+
+	usage: [posts_for_membership#member] :  member = membership level
+		   [posts_for_membership#member|#guest|#free]
+	desc : lists posts which are accessible to the membership type as defined (here "member" )   
+
+21. user_purchase_another_membership
+	usage: [user_purchase_another_membership] :  
+	desc : Shows membership buttons for multiple membership level purchase
+
+22. user_other_subscriptions
+	usage: [user_other_subscriptions] : 
+	desc : lists multiple level membership details
+	
+23. membership_extend_link
+    usage: [membership_extend_link label="click extend your membership"] or
+	[membership_extend_link]
+    desc : Prints extend the membership link
+
+24. payperpost [new]
+
+    usage: [payperpost#1] : 1 = post_id
+	       [payperpost#1,2,3] : 1,2,3 list of post_ids 
+	desc : allow posts/pages contents to be assigned to a purchasable post
+		
+25. user_id_is
+	usage: [user_id_is#123]:	123 =  User Id OR
+		   [user_id_is#123|234|456]
+	desc : checks user and enables the post only for mentioned users(here: 123/234/456)
+
+26. user_payment_history
+	usage: [user_payment_history]
+	desc : It will show the user payment history, i.e list of successful payment transactions of the user 
+		   (post purchase/subscription purchase).	   
+
+27. user_list
+	usage: [user_list use_field=image,first_name,last_name,email use_filter=email,status  sort_by=first_name,id 
+			sort_type=desc,asc  show_level=gold,platinum page_limit=10]
+	desc : It will display the members list, possible use_filter values (username, id, membership_type, reg_date, 
+		   last_payment, expire_date,fee,status,email,first_name and last_name).
+28. user_pack_is
+	usage: [user_pack_is#123]:	123 =  Pack Id OR
+		   [user_pack_is#123|234|456]
+	desc : checks user subscription pack id and enables the post only for mentioned user subscription pack ids (here: 123/234/456)		   
+
+=======================================================================================
+Message Tags : intended to be used in Messages, but now also works as content tags
+
+	
+1. purchase_cost
+
+	usage :	[[purchase_cost]]
+	desc  : prints Cost and currency of a purchasable post
+	
+2.	login_register
+
+	usage : [[login_register]]
+	desc  : Login or register form
+	
+3. 	login_register_links
+	
+	usage : [[login_register_links]]
+	desc  : prints Links for login and register
+	
+4. 	login_link
+	
+	usage : [[login_link]] 
+	desc  : prints Login link only
+	
+5. 	register_link
+	
+	usage : [[register_link]]
+	desc  : prints Register link only
+
+6. 	membership_types
+
+	usage : [[membership_types]]
+	desc  : prints A list of membership levels that can see this post/page
+	
+7.	duration
+
+	usage : [[duration]]
+	desc  : prints number of days that the user will have access for
+	
+8.	username
+
+	usage : [[username]]
+	desc  : prints username
+
+9. name
+	
+	usage : [[name]]
+	desc  : prints name / username
+	
+10.	register
+
+	usage : [[register]]
+	desc  : prints register form
+	
+11. transaction_amount	
+	
+	usage : [transaction_amount]
+	desc  : prints transaction amount (Implemented only for manual pay)

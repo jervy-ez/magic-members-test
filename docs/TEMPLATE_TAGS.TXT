@@ -1,0 +1,19 @@
+-- MGM TEMPLATE TAGS & FUNCTIONS
+
+ - mgm_get_post_purchase_button
+   
+   desc: displays post buy button and send to payment buttons list to select from
+   
+   args: post_id
+   
+   file: hooks/hooks/content_hooks.php 
+   
+   
+   
+- mgm_get_postpack_purchase_button
+   
+   desc: displays postpack buy button and send to payment buttons list to select from
+   
+   args: postpack_id
+   
+   file: hooks/hooks/content_hooks.php    

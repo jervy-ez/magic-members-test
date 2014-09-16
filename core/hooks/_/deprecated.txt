@@ -1,0 +1,13 @@
+/**
+ * test
+ */
+/*function mgm_login_redirect_url_ct($user){
+	return site_url('after-login-custompage');
+}
+function mgm_register_redirect($redirect_url){
+	// $user = wp_get_current_user();
+	// mgm_pr($user);die;
+	return site_url('after-login-custompage2');
+}
+add_filter('mgm_register_redirect', 'mgm_register_redirect', 10, 1);
+*/

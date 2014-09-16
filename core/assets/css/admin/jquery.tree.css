@@ -1,0 +1,17 @@
+#tree_container ul {
+	padding-left:20px;
+}
+#tree_container li {
+	list-style:none;
+}
+#tree_container ul.hide {
+	display:none;
+}
+#tree_container span {
+	color:#999;
+	font-family:"Courier New", Courier, monospace;
+	cursor:default;
+}
+#tree_container span.expanded, #tree_container span.collapsed {
+	cursor:pointer;
+}

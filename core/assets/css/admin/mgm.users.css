@@ -1,0 +1,13 @@
+/* CSS Document */
+.overline{border-top:1px solid #DFDFDF; padding:2px 0 2px 0; margin-top:2px 0 2px 0; width:100%}
+.s-inactive{ color:#0000FF}
+.s-active{ color:#00CC00}
+.s-expired{ color:#FF3300}
+.s-pending{ color:#999966}
+.s-expired-trial{ color:#FF6633}
+.s-canceled{ color:#FF33CC}
+.s-error{ color:#660066}
+.s-canceled-awaiting{ color:#FF9966}
+#footer { position:relative !important;}
+#wpfooter { position:relative !important;}
+

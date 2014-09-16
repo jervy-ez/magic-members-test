@@ -1,0 +1,14 @@
+/*custom css for profile tab pages*/
+
+.mgm_profile_subscription_info .cell{
+	background-color: none;
+	padding: 10px;	
+}
+
+.mgm_profile_subscription_info .width25{
+	width: 100px;
+}
+
+.mgm_profile_subscription_info .width2{
+	width: 5px;
+}

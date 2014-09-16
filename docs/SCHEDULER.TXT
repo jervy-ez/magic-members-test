@@ -1,0 +1,25 @@
+Magic Members Crons
+--------------------------------------
+
+	1) 	Reminder Mailer:(Runs Daily)
+		
+		This cron finds the memberships going to be expired in the periods mentioned in 
+		Account Expiration Reminder Email Configuration & Settings and sends expiry warning email at specified intervals of days.
+		
+		ie. if the Incremental value is 5,3,1
+		The first email will be sent 5 days/ 3 days/ 1 day before the expiry date.
+				
+		
+
+	2) Expiry check:(Runs Daily)
+
+		This cron finds the members whose membership gets expired on the day. The memberships with a past expiry date also will get processed.
+		In order to consider the payments scheduled to be processed on the expiry date, the memberships with a recurring payment will be processed
+		the next day of actual expiry date and non-recurring memberships will be processed exactly on the expiry date.
+		
+		The cron will mark the subscriptions with a billing cycle = 0 OR billing cycle  > 1 with an elapsed expiry date as Inactive
+		
+		One-time subscriptions will be marked as Expired incase expiry date is reached.
+		
+		 
+		 

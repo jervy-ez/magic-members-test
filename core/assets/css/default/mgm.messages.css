@@ -1,0 +1,21 @@
+/*FOR MESSAGE DISPLAY - MGM*/
+.mgm_message_error {
+	background-color: #FFEBE8;
+	border-color: #CC0000;
+	-moz-border-radius: 3px 3px 3px 3px;
+	border-style: solid;
+	border-width: 1px;
+	margin: 0 0 16px 8px;
+	padding: 12px;
+	width:90%;
+}
+.mgm_message_success {
+	background-color: #FFFFE0;
+	border-color: #E6DB55;
+	-moz-border-radius: 3px 3px 3px 3px;
+	border-style: solid;
+	border-width: 1px;
+	margin: 0 0 16px 8px;
+	padding: 12px;
+	width:90%;
+}

@@ -1,0 +1,115 @@
+/*for pages and posts content display styles*/
+.mgm_color_red{
+	color: #FF0000;
+}
+.mgm_margin_bottom_10px{
+	margin-bottom: 10px;
+}
+.mgm_margin10px{
+	margin: 10px;
+}
+.mgm_margin10px0px{
+	margin:10px 0px;
+}
+
+.mgm_padding_top_10px{
+	padding-top: 10px;
+}
+.mgm_border_top1px_solid_silver {
+	border-top: 1px solid silver;
+}
+.mgm_vertical_align_top{
+	vertical-align: top; 
+} 
+.mgm_text_align_left{
+	text-align: left;
+} 
+.mgm_text_align_right{
+	text-align: right;
+} 
+
+
+.mgm_width160px{
+	width: 160px;
+} 
+.mgm_width100pr{
+	width:100%;
+} 
+
+.mgm_post_title_div{
+	font-weight: bold; 
+	font-size: 14px; 
+	margin-bottom: 5px;
+}
+.mgm_post_content_div{
+	font-size: 10px; 
+	margin-bottom: 5px;
+}
+.mgm_post_membership_level_div{
+	margin-bottom: 5px; 
+	font-weight: bold;
+}
+.mgm_post_access_total_div{
+	margin-bottom: 10px; 
+	font-weight: bold;
+}
+.mgm_content_back_link_div{
+	font-weight: bold; 
+	float:left; 
+	margin-left:10px;
+}
+.mgm_content_total_post_div{
+	font-weight: bold; 
+	float:left; 
+	margin-left:10px;
+}
+.mgm_content_total_publish_div{
+	font-weight: bold; 
+	float:right; 
+	margin-right:10px;
+}
+.table {position:relative;}
+div.table div.row {display:table; width:100%; border-collapse:collapse;}
+div.table div.row div.cell {display: table-cell;padding:2px;word-break:hyphenate;}
+div.table div.row.br_bottom{border-bottom:1px solid #DFDFDF;}
+
+div.table.br{border:1px solid #DFDFDF;}
+
+.padding10px{padding:10px !important;}
+
+.th_div {
+	color: #666;
+	font-size: 12px;
+	font-weight: 500;
+	letter-spacing: 0.1em;
+	line-height: 2.6em;
+	text-transform: uppercase;
+}
+
+.mgm_payment_history_container {
+	width:560px;
+}
+
+.mgm_text_align_center{
+	text-align: center;
+}
+
+.width50px{width:50px;}
+.width100px{width:100px;}
+.width125px{width:125px;}
+.width140px{width:140px;}
+
+.maxwidth50px{max-width:50px;}
+.maxwidth100px{max-width:100px;}
+.maxwidth125px{max-width:125px;}
+.maxwidth140px{max-width:140px;}
+
+
+.width2{width:2%;}
+.width15{width:15%;}
+.width25{width:25%;}
+.width30{width:30%;}
+.width45{width:45%;}
+.width70{width:70%;}
+.width73{width:73%;}
+.width100{width:100%;}

@@ -1,0 +1,346 @@
+3> mgm_parse_query_pre_process
+
+   @filesource hooks/mgm_query_hooks.php
+   @line 82
+   
+   @type: action
+   
+   @param none
+   
+   @desc triggers before mgm query paring starts for known action handlers ( download, process payment etc.) 
+   
+   <code>
+   function my_parse_query_pre_process_callbck(){
+   	// do something 
+   }
+   add_action('mgm_parse_query_pre_process','my_parse_query_pre_process_callbck', 10);
+   </code>
+  
+4> mgm_url_router_pre_process 
+
+   @filesource hooks/mgm_query_hooks.php
+   @line 144
+   
+   @type: action
+   
+   @param none
+   
+   @desc triggers before mgm query paring starts for known routing handlers 
+   
+  
+6> mgm_user_register
+   
+   @filesource hooks/mgm_user_hooks.php
+   @line 928
+   
+   @type: action
+   
+   @param int $user_id
+   
+   @desc triggers just before redirting to payment processor button generation, allows other plugin to hook similar to "user_register"
+   
+   <code>
+   function my_parse_query_pre_process_callbck($user_id){
+   	// do something 
+   }
+   add_action('mgm_user_register','my_user_register_callbck', 10, 1);
+   </code>
+   
+7> mgm_admin_user_register 
+
+   @filesource hooks/mgm_user_hooks.php
+   @line 935
+   
+   @type: action
+   
+   @param $user_id
+   
+   @desc same as "mgm_user_register" only triggered for admin created user  
+   
+8> mgm_pre_authenticate_user 
+
+   @filesource hooks/mgm_user_hooks.php
+   @line 1034
+   
+   @type: action
+   
+   @param $user->ID
+   
+   @desc 
+   
+9> mgm_user_status_change 
+
+   @filesource hooks/mgm_user_hooks.php (multifile)
+   @line 1072 (multiline)
+   
+   @type: action
+   
+   @param int $user_id
+   @param string $new_status
+   @param string $old_status
+   @param string $context
+   @param int $pack_id
+   
+   @desc triggered on members status change 
+   
+
+10> mgm_new_user_notification
+
+   @filesource hooks/mgm_user_hooks.php
+   @line 1258
+   
+   @type: action
+   
+   @param $user->ID
+   @param $user_pass
+   
+   @desc action trigger after new user notifications sent
+   
+11> mgm_before_login_redirect
+ 
+   @filesource hooks/mgm_user_hooks.php
+   @line 1393
+   
+   @type: action
+   
+   @param $user
+   
+   @desc custom hook
+   
+
+   
+13> mgm_user_login_pre_process
+
+   @filesource libs/functions/mgm_forms.php
+   @line 27
+   
+   @type: action
+   
+   @param none
+   
+   @desc  process hooked logins i.e. facebook connect
+   
+14> mgm_user_register_pre_process
+
+   @filesource libs/functions/mgm_forms.php
+   @line 337
+   
+   @type: action
+   
+   @param none
+   
+   @desc  process more custom 3rd party register before default register processing, primarily developed for facebook connect
+		  later will be reused to add more social register process
+   
+
+   
+16> mgm_membership_subscription_cancelled 
+
+   @filesource libs/functions/mgm_misc_functions.php (multifile)
+   @line 2577
+   
+   @type: action
+   
+   @param array('user_id' =>$user_id)
+   
+   @desc  runs after any subscription cancelled
+   
+17> mgm_register_form_additional, mgm_login_form_additional, mgm_lostpassword_form_additional
+
+   @filesource libs/functions/mgm_misc_functions.php
+   @line 3929
+   
+   @type: action
+   
+   @param none
+   
+   @desc 
+   
+18> mgm_attach_scripts 
+
+   @filesource libs/functions/mgm_theme_functions.php
+   @line 53  (multiline)
+   
+   @type: action
+   
+   @param none
+   
+   @desc attach js/css from mgm to specific pages/areas
+   
+19>  
+   
+20> 
+   
+21> mgm_autoresponder_result 
+
+   @filesource libs/components/mgm_controller.php
+   @line 474 (multiline)
+   
+   @type: action
+   
+   @param $result
+   @param $code
+   @param $method
+   
+   @desc  default action autoresponder result 
+   
+22>  mgm_print_module_data
+
+   @filesource core/modules/payment/mgm_1shoppingcart.php (multifile)
+   @line 275 (multiline)
+   
+   @type: action
+   
+   @param $this->code
+   
+   @desc  record POST/GET data
+   
+23>  mgm_notify_pre_process_[module name]  
+
+   @filesource core/modules/payment/mgm_1shoppingcart.php (multifile)
+   @line 329 
+   
+   @type: action
+   
+   @param tran_id = transaction id of the payment
+   @param custom = custom parameter / passthrough from payment gateway
+   
+   @desc   before processing payment data sent from gateway
+   
+24> mgm_notify_post_process_[module name]  (multifile)
+
+   @filesource core/modules/payment/mgm_1shoppingcart.php
+   @line 352 
+   
+   @type: action
+   
+   @param tran_id = transaction id of the payment
+   @param custom = custom parameter / passthrough from payment gateway
+   
+   @desc   after processing payment data sent from gateway
+   
+25> mgm_notify_post_process_unverified_[module name] 
+
+   @filesource core/modules/payment/mgm_1shoppingcart.php (multifile)
+   @line 355 
+   
+   @type: action
+   
+   @param none
+   
+   @desc   after processing payment data sent from gateway, data not verified
+   
+26> mgm_buy_post_transaction_success, mgm_post_purchase_payment_success 
+
+   @filesource core/modules/payment/mgm_1shoppingcart.php (multifile)
+   @line 550,551 
+   
+   @type: action
+   
+   @param  @array: array('post_id' => $post_id) 
+   
+   @desc  runs after any post purchase successfully completes
+   
+27> mgm_return_post_purchase_payment_[module name] e.g. mgm_return_post_purchase_payment_2checkout
+
+   @filesource core/modules/payment/mgm_1shoppingcart.php (multifile)
+   @line 614,615 
+   
+   @type: action
+   
+   @param @array: array('post_id' => $post_id) 
+   
+   @desc runs after each module is processed its payment callback, success/failure both
+   
+28> mgm_membership_transaction_success, mgm_subscription_purchase_payment_success  
+
+   @filesource core/modules/payment/mgm_1shoppingcart.php (multifile)
+   @line 871,872
+   
+   @type: action
+   
+   @param @array: array('user_id' => $user_id) 	
+   
+   @desc runs after any subscription purchase successfully completes
+   
+29> mgm_update_coupon_usage 
+
+   @filesource core/modules/payment/mgm_1shoppingcart.php
+   @line 929
+   
+   @type: action
+   
+   @param @array: array('user_id' => $user_id)
+   
+   @desc update coupon usage
+   
+30>  mgm_return_[module name ] , mgm_return_subscription_payment_[module name] e.g. mgm_return_subscription_payment_2checkout
+
+   @filesource core/modules/payment/mgm_1shoppingcart.php
+   @line 940,941,942
+   
+   @type: action
+   
+   @param @array: array('user_id' => $user_id) 
+   
+   @desc runs after each module is processed its payment callback, success/failure both
+   
+31>  mgm_additional_code 
+
+   @filesource core/modules/payment/mgm_2checkout.php (multifile)
+   @line 424 (multiline)
+   
+   @type: action
+   
+   @param none
+   
+   @desc captured any additional button data passed to payment form before form is generated
+     
+32> mgm_rebill_status_change
+
+   @filesource core/modules/payment/mgm_authorizenet.php (multifile)
+   @line 1540
+   
+   @type: action
+   
+   @param user_id, new_status, old_status, context 
+	      ( context= query when triggered by MGM using daily cron, notify= when triggered by gateway via post back )
+   
+   @desc on each ocassion of user rebill status change, this is executed
+   
+33> mgm_return_post_purchase_payment
+
+   @filesource core/modules/payment/mgm_eway.php (multifile)
+   @line 824 
+   
+   @type: action
+   
+   @param @array: array('user_id' => $user_id) 
+   
+   @desc 
+   
+34> mgm_unpaid_autoresponder
+
+   @filesource core/modules/payment/mgm_trial.php
+   @line 273 
+   
+   @type: action
+   
+   @param @array: array('user_id' => $user_id)
+   
+   @desc 
+   
+35> mgm_return_subscription_payment 
+
+   @filesource core/modules/payment/mgm_trial.php
+   @line 276 
+   
+   @type: action
+   
+   @param @array:  array('user_id' => $user_id, 'acknowledge_ar' => $acknowledge_ar, 'mgm_member' => $member)
+   
+   @desc 
+   
+   
+   
+     

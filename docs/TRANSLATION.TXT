@@ -1,0 +1,50 @@
+http://codex.wordpress.org/WordPress_in_Your_Language
+
+to create a new language translation, please follow the steps:
+
+ first recognise language code you are creating http://codex.wordpress.org/WordPress_in_Your_Language and full list 
+ http://www.gnu.org/software/gettext/manual/html_chapter/gettext_16.html#Language-Codes
+ 
+ consider Dutch - Nederlands (nl_NL) 
+ 
+ the name of GetText (po) file will be mgm-nl_NL.po 
+ 
+ 1. Download and install poedit.exe http://www.poedit.net/download.php
+ 
+ 2. After install copy your version of magicmembers in any local folder i.e c:/wordpress/wp-content/plugins/magicmembers
+ 
+ 3. Open poedit and click "new catalog" in "File" menu
+ 
+ 4.  a) Project Info - set needed, see sample any po file mgm provides
+     b) Path - set base path to root of installation i.e. c:/wordpress/
+	           add one more path and set full path i.e. wp-content/plugins/magicmembers/
+			   
+	 c) Keywords : delete all existing and add two new 
+	     __ and _e  ( see and po file from mgm)
+		 
+ 
+ 
+ 5. hit ok, save the po file i.e "mgm-nl_NL.po"
+ 
+ 6. If paths are ok, poedit will start to scan and load all translation texts
+ 
+ 7. edit text as needed
+ 
+ 8. Save the po file, it will generate mo file
+ 
+ 
+ 
+ 
+ To edit magicmembers exting po file
+ 
+ 1. Open it in poedit.
+ 
+ 2. Update path ( base path only if mgm installed properly)
+ 
+ 3. Update Catalog
+ 
+ 4. Edit loaded translation texts
+ 
+ 5. Save	 		   
+			   
+			   

@@ -1,0 +1,24 @@
+/* CSS Document */
+.mgm_width_300px {
+	width: 300px;
+}
+
+
+.postpurhase-heading{ text-decoration:underline; font-size:12px; font-weight:bold; color:#657783; font-family:Verdana, Arial, Helvetica, sans-serif; line-height:16px;font-style:oblique; margin-top:10px}
+
+.mgm_width_30px {
+	width: 30px;
+}
+
+.mgm_width_55px {
+	width:55px;
+}
+
+.mgm_width_50px {
+	width:50px;
+}
+
+.displaynone{display:none;}
+.mgm-padding-tb{ padding:5px 0 5px 0;}
+.tips{color:#693434;vertical-align:middle; padding: 3px;padding-left: 25px; border:#DBDBDB 1px solid;	text-align:justify;	width:80%;height:auto; font-style:oblique;	font-size:11px;	-moz-border-radius: 3px;	-khtml-border-radius: 3px;	-webkit-border-radius: 3px;	border-radius: 3px;	background-color: #ffffe0;	border-color: #e6db55;	margin-top:5px;}
+.tips{background:url("../../images/icons/lightbulb.png") no-repeat 5px 5px;background-color: #ffffe0;border-color: #e6db55; min-height:25px;}

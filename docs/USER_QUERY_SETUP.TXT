@@ -1,0 +1,80 @@
+// to get users on usermeta,
+$user = new WP_User_Query( array( 'meta_key' => 'country', 'meta_value' => 'Israel' ) ); 
+
+To run user query on MagcicMembers member data like sample above, which is saved as serialised array, 
+you need to copy the needed metadata to usermeta table, there are now two actions hooks in MGM that allows that.
+
+"mgm_user_options_read" with two arguments, called each time a member object is initialized using mgm_get_member($user_id)
+@param array $options
+$param int $user_id
+
+"mgm_user_options_save" with two arguments, called each time member object is saved uisng mgm_get_member($user_id)->save();
+@param array $options
+$param int $user_id
+
+to add any custom meta for query, you need to sync first, this can be achieved by adding a callback to read action
+or save action
+
+<code>
+
+/**
+ * member object read action, used to copy member data to metadata for easy user query
+ * 
+ * @param array $options saved in usermeta
+ * @param int user_id
+ * @return void
+ * @since 2.7
+ */
+function my_user_options_sync_read($options, $user_id){
+	// set country if changed	
+	if( isset($options['custom_fields']['country']) && !empty($options['custom_fields']['country']) ){
+		// check
+		if( $options['custom_fields']['country'] != mgm_get_user_option('_mgm_user_country', $user_id)){
+			// update
+			update_user_option($user_id, '_mgm_user_country', $options['custom_fields']['country'], true);	
+		}	
+	}
+	
+	// you can log member options data to inspect how to fetch the data you need
+	// this logs to uploads/mgm/logs
+	mgm_log($options, ('user_' . $user_id . '_' .__FUNCTION__));
+}
+// add
+add_action('mgm_user_options_read'                      , 'my_user_options_sync_read', 10, 2);
+
+/** 
+ * member object write action, used to copy member data to metadata for easy user query
+ * 
+ * @param array $options saved in usermeta
+ * @param int user_id
+ * @return void	
+ * @since 2.7
+ */
+function my_user_options_sync_save($options, $user_id){
+	// set country if changed	
+	if( isset($options['custom_fields']['country']) && !empty($options['custom_fields']['country']) ){
+		// check
+		if( $options['custom_fields']['country'] != mgm_get_user_option('_mgm_user_country', $user_id)){
+			// update
+			update_user_option($user_id, '_mgm_user_country', $options['custom_fields']['country'], true);	
+		}	
+	}
+}
+// add
+add_action('mgm_user_options_save'                      , 'my_user_options_sync_save', 10, 2);
+
+</code>
+
+Now you can run a query on the field
+
+<code>
+
+// to get users on usermeta,
+$user = new WP_User_Query( array( 'meta_key' => '_mgm_user_country', 'meta_value' => 'IL' ) ); // IL => Israel
+
+</code>
+
+Note: we suggest you keep a "_mgm_" namespace prefix to all custom meta copied to usermeta, 
+this will ensure they do not clash with other internal MGM usermeta as well can be removed 
+from the plugin on deactivation.
+
