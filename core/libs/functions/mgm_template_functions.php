@@ -425,7 +425,8 @@ function mgm_user_other_subscriptions_info($user_id=NULL) {
 			// cancel script
 			$cancel_script = '';
 			if( in_array($other_members->membership_type, array('free','trial') ) 
-				|| $other_members->status == MGM_STATUS_CANCELLED 
+				|| $other_members->status == MGM_STATUS_CANCELLED
+				|| $other_members->amount == 0 
 				|| ( isset($other_members->status_reset_on) && isset($other_members->status_reset_as) ) ) {
 				// script
 				$cancel_script = '<script language="javascript">'.
@@ -518,7 +519,7 @@ function mgm_get_unsubscribe_status_button($member, $user){
 		// show unsucscribe button			
 		if( !is_super_admin() ) {
 			// check
-			if( $module = $member->payment_info->module ) {
+			if( isset($member->payment_info->module ) && $module = $member->payment_info->module ) {
 				// if a valid module
 				if( $obj_module = mgm_is_valid_module($module, 'payment', 'object') ){
 					// output button
@@ -1221,7 +1222,7 @@ function mgm_get_next_drip_feed(){
 //membership contents
 function mgm_membership_contents() {
 
-	global $user_ID,$current_user;		
+	global $user_ID,$current_user,$post;		
 	
 	$html = '';
 
@@ -1943,8 +1944,8 @@ function mgm_generate_member_list($args=array()){
 	// check
 	if(!empty($search_field_name)) {	
 		// clean	
-		$search_field_value = $wpdb->escape($search_field_value);// for sql
-		$search_field_name = $wpdb->escape($search_field_name);// for sql	
+		$search_field_value = mgm_escape($search_field_value);// for sql
+		$search_field_name = mgm_escape($search_field_name);// for sql	
 		
 		// view data	
 		$data['search_field_name'] 	= $search_field_name;
@@ -2217,8 +2218,8 @@ function mgm_generate_member_list($args=array()){
 	// order
 	$sql_order = $data['sort_field'] = $data['sort_type'] = '';
 	// sort
-	$sort_field_name = $wpdb->escape($sort_field_name);// for sql
-	$sort_order_type = $wpdb->escape($sort_order_type);// for sql	
+	$sort_field_name = mgm_escape($sort_field_name);// for sql
+	$sort_order_type = mgm_escape($sort_order_type);// for sql	
 
 	// check
 	if(isset($sort_field_name)){
@@ -2489,7 +2490,7 @@ function mgm_user_public_profile($args=array()){
 
 				if(($filed_status && isset($member->custom_fields->show_public_profile) && $member->custom_fields->show_public_profile =='Y') || !$filed_status) {
 					// html	
-					$html .= '<span id="get_avatar"></span>';
+					$html .= '<span id="get_avatar" class="mgm_user_photo"></span>';
 					
 					$html .= '<div class="table width100 br">';
 				
@@ -2553,26 +2554,23 @@ function mgm_user_public_profile($args=array()){
 												if($field['name'] =='email') {
 													$field['name'] = 'user_email';
 												}
-													
-												$html .='<div class="row alternate br_bottom">
-															<div class="cell width25 padding10px"><strong>' . $field['label'] . '</strong></div>
-															<div class="cell width2 padding10px" ><strong>:</strong></div>
-															<div class="cell width73 padding10px">' . esc_html($user->$field['name']) . '</div>
-														</div>';										
+												$html .='<div class="row alternate br_bottom">';
+												$html .=sprintf('<div class="cell width25 padding10px mgm_%s_field"><label><b>%s</b></label></div>',$field['name'], $field['label']);
+												$html .='<div class="cell width2 padding10px" ><b>:</b></div>';
+												$html .=sprintf('<div class="cell width73 padding10px mgm_%s_value">%s</div>',$field['name'], esc_html($user->$field['name']));
+												$html .='</div>';										
 											}										
-										}else {
-											
-											$html .='<div class="row alternate br_bottom">
-														<div class="cell width25 padding10px"><strong>' . $field['label'] . '</strong></div>
-														<div class="cell width2 padding10px" ><strong>:</strong></div>
-														<div class="cell width73 padding10px">';
-											
+										}else {											
 											// val unserialize - issue #1422
 											$val = maybe_unserialize($member->custom_fields->$field['name']);
 											// array to string
-											if( is_array($val) ) $val = implode(', ', $val);										
-											
-											$html .= $val.'</div></div>';
+											if( is_array($val) ) $val = implode(', ', $val);
+																						
+											$html .='<div class="row alternate br_bottom">';
+											$html .=sprintf('<div class="cell width25 padding10px mgm_%s_field"><label><b>%s</b></label></div>',$field['name'], $field['label']);
+											$html .='<div class="cell width2 padding10px" ><b>:</b></div>';
+											$html .=sprintf('<div class="cell width73 padding10px mgm_%s_value">%s</div>',$field['name'],$val);
+											$html .='</div>';
 										}
 									}else {
 										if(trim($field['type']) == 'image') {								
@@ -2586,7 +2584,7 @@ function mgm_user_public_profile($args=array()){
 				}else{
 					$html .= '<div class="table width100 br">
 						<div class="row alternate br_bottom">
-							<div class="cell width25 padding10px">
+							<div class="cell width25 padding10px mgm_not_allowed_to_show">
 								<strong>' .__('User not allowed to show his profile public.','mgm') . '</strong>
 							</div>
 						</div>
@@ -2595,7 +2593,7 @@ function mgm_user_public_profile($args=array()){
 			} else {
 				$html .= '<div class="table width100 br">
 					<div class="row alternate br_bottom">
-						<div class="cell width25 padding10px">
+						<div class="cell width25 padding10px mgm_no_profile">
 							<strong>' .sprintf(__('No user profile found with this user name " %s ".','mgm'),$username) . '</strong>
 						</div>
 					</div>
@@ -2604,7 +2602,7 @@ function mgm_user_public_profile($args=array()){
 		} else {
 				$html .= '<div class="table width100 br">
 					<div class="row alternate br_bottom">
-						<div class="cell width25 padding10px">
+						<div class="cell width25 padding10px mgm_no_access">
 							<strong>' . __('You dont have access to view content of this page.','mgm') . '</strong>
 						</div>
 					</div>

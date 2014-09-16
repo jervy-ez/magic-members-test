@@ -156,7 +156,7 @@ class mgm_autoresponseplus extends mgm_autoresponder{
 		// set params
 		if($this->set_postfields($user_id)){			
 			// transport
-			return $this->_transport();
+			return $this->_transport($user_id);
 		}
 		// return 
 		return false;

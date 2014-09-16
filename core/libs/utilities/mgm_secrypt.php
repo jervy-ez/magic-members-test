@@ -564,7 +564,7 @@ class mgm_secrypt {
             if ($i % 2 > 0){
 
                 // If we are encrypting
-                if ($encrypt){
+                if ($encrypt /*&& isset($Lock[$Position])*/){// added for warning, revert back if trouble 
 
                     // Swap position
                     $Position = strpos($Lock, $char);
@@ -578,7 +578,7 @@ class mgm_secrypt {
             } else {
 
                 // If we are encrypting
-                if ($encrypt){
+                if ($encrypt /*&& isset($Lock[$Position])*/){// added for warning, revert back if trouble 
 
                     // Swap character
                     $char = $Lock[$Position];

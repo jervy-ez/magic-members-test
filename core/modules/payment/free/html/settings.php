@@ -162,20 +162,22 @@
 					mgm_show_message("#module_settings_<?php echo $data['module']->code?>", {status: "running", message: "<?php _e('Processing','mgm')?>..."}, true);
 				  },
 				  success: function(data){	
-						// remove message										   														
-						jQuery('#module_settings #message').remove();													
-						// success	
-						if(data.status=='success'){							
-							// create message
-							jQuery('#module_settings').prepend('<div id="message"></div>');
-							// show
-							jQuery('#module_settings #message').addClass(data.status).html(data.message);																								
-						}else{															
-							// create message
-							jQuery('#module_settings').prepend('<div id="message"></div>');
-							// show
-							jQuery('#module_settings #message').addClass(data.status).html(data.message);
-						}														
+					// show status  -issue #1758
+					mgm_show_message("#module_settings_<?php echo $data['module']->code?>", data);						
+					/*	// remove message				
+					jQuery('#module_settings #message').remove();												
+					// success	
+					if(data.status=='success'){							
+						// create message
+						jQuery('#module_settings').prepend('<div id="message"></div>');
+						// show
+						jQuery('#module_settings #message').addClass(data.status).html(data.message);																								
+					}else{															
+						// create message
+						jQuery('#module_settings').prepend('<div id="message"></div>');
+						// show
+						jQuery('#module_settings #message').addClass(data.status).html(data.message);
+					}*/													
 				  }}); // end   		
 				  return false;											
 			}

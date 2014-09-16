@@ -89,9 +89,9 @@
 			$data['search_field_value_two'] = htmlentities($search_field_value_two, ENT_QUOTES, "UTF-8");// for display
 			
 			// issue#: 219					
-			$search_field_value     = $wpdb->escape($search_field_value);// for sql
+			$search_field_value     = mgm_escape($search_field_value);// for sql
 			// end date value
-			$search_field_value_two = $wpdb->escape($search_field_value_two);// for sql		
+			$search_field_value_two = mgm_escape($search_field_value_two);// for sql		
 			
 			//current date
 			$curr_date = mgm_get_current_datetime();
@@ -651,6 +651,12 @@
 					$message = mgm_replace_email_tags($message, $user_id) ;
 					// mail																				
 					mgm_mail($userdata->user_email, $subject, $message); //send an email to the buyer
+					
+					// send notification - issue #1758
+					if($system_obj->setting['enable_new_user_email_notifiction_after_user_active'] == 'Y') {
+						$user_pass = mgm_decrypt_password($member->user_password, $user_id);
+						do_action('mgm_register_user_notification', $user_id, $user_pass);
+					}					
 					// unset
 					unset($userdata,$message);															  
 				}
@@ -691,7 +697,7 @@
 		$pack_obj    = mgm_get_class('subscription_packs');
 		$packdetails = $pack_obj->get_pack($subs_pack['pack_id']);
 		// if trial on		
-		if ($subs_pack['trial_on']) {
+		if (isset($subs_pack['trial_on'])) {
 			$member->trial_on            = $subs_pack['trial_on'];
 			$member->trial_cost          = $subs_pack['trial_cost'];
 			$member->trial_duration      = $subs_pack['trial_duration'];
@@ -975,7 +981,7 @@
 					if(isset($bk_users_to_import)){						
 						$importuser = new stdClass();												
 						foreach ($import_user_fileds as $import_user_filed){						
-							if($user->$import_user_filed) 
+							if(isset($user->$import_user_filed)) 
 								$importuser->$import_user_filed = $user->$import_user_filed;
 							if($import_user_filed =='pack_id') 
 								$importuser->$import_user_filed = $member->pack_id;
@@ -1774,7 +1780,7 @@
 				foreach ($rolename as $role => $value) {
 					//added later to consider only the edited role:
 					if($role == $selected_role) {
-						$value =  trim($wpdb->escape($value));
+						$value =  trim(mgm_escape($value));
 						if(empty($value)) {
 							$message[] = __('Role cannot be blank','mgm');
 							$error = true;
@@ -1814,7 +1820,7 @@
 								//add new capabilities:
 								if(!empty($arr_to_add)) {
 									foreach ($arr_to_add as $cap) {
-										$cap =  $wpdb->escape($cap);
+										$cap =  mgm_escape($cap);
 										//grant access
 										$objrole->update_capability_role($role, $cap, true);
 									}
@@ -1823,7 +1829,7 @@
 								//remove access if any capabilities unchecked
 								if(!empty($arr_to_remove)) {
 									foreach ($arr_to_remove as $cap) {
-										$cap =  $wpdb->escape($cap);
+										$cap =  mgm_escape($cap);
 										//remove access
 										$objrole->update_capability_role($role, $cap, false);
 									}
@@ -1856,7 +1862,7 @@
 			extract($_POST);			
 			$status = 'error';	
 			$error 	= false;
-			$rolename =  trim($wpdb->escape($rolename));
+			$rolename =  trim(mgm_escape($rolename));
 			if(empty($rolename)) {
 				$message[] = __('Role cannot be blank.','mgm');
 				$error = true;
@@ -1902,8 +1908,8 @@
 		$message = array();
 		extract($_POST);		
 		if(isset($role)) {
-			$role = $wpdb->escape($role);
-			$new_role = $wpdb->escape($new_role);
+			$role = mgm_escape($role);
+			$new_role = mgm_escape($new_role);
 			if($wp_roles->is_role($role)) {				
 				if($objrole->remove_role($role, $new_role)) {
 					$message[] = __('Successfully deleted the role.','mgm');
@@ -1927,8 +1933,8 @@
 		$message = array();
 		extract($_POST);		
 		if(isset($role)) {
-			$role = $wpdb->escape($role);
-			$new_role = $wpdb->escape($new_role);
+			$role = mgm_escape($role);
+			$new_role = mgm_escape($new_role);
 			if($wp_roles->is_role($role)) {				
 				if($objrole->move_users($role, $new_role)) {				
 					$message[] = __('Successfully moved the users.','mgm');
@@ -2173,7 +2179,7 @@
 							$user = new WP_User($uid);	
 							// check						
 							if(isset($user->ID) && $user->ID != 0 && (int)$user->ID>0 ) {	
-								$uid = $wpdb->escape($uid);
+								$uid = mgm_escape($uid);
 								$user = new WP_User($uid);	
 								$member = mgm_get_member($user->ID);
 								for($i=0; $i<count($ot_mem);$i++){
@@ -2202,7 +2208,7 @@
 					// loop users
 					foreach ($members as $uid) {							
 						//delete user
-						$uid = $wpdb->escape($uid);
+						$uid = mgm_escape($uid);
 						// check
 						if((int)($uid)>0) {	
 							// get user							
@@ -2272,7 +2278,7 @@
 				// loop users
 				foreach ($members as $uid) {							
 					//delete user
-					$uid = $wpdb->escape($uid);
+					$uid = mgm_escape($uid);
 					// check
 					if((int)($uid)>0) {	
 						// get user							

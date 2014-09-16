@@ -349,7 +349,7 @@ class mgm_subscription_packs extends mgm_object{
 		// transalation issue #950
 		$tpl_data['text_for'] = __('for','mgm');
 		
-		$tpl_data['num_cycles'] = ($pack['num_cycles'] == 0) ? __(' - Ongoing', 'mgm') : (sprintf(' - %s %d %s', $text_for, (int)$pack['num_cycles'], (($pack['num_cycles'] == 1 )? __('time','mgm') : __('times','mgm')))); 				
+		$tpl_data['num_cycles'] = ($pack['num_cycles'] == 0) ? __(' - Ongoing', 'mgm') : (sprintf(' - %s %d %s', $tpl_data['text_for'], (int)$pack['num_cycles'], (($pack['num_cycles'] == 1 )? __('time','mgm') : __('times','mgm')))); 				
 		$tpl_data['trial_duration_period'] = strtolower($this->get_pack_duration($pack, true));		
 		
 		// merge rest, overwrite tpl_data

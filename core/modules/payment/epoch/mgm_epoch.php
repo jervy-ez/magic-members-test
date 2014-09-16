@@ -993,7 +993,7 @@ class mgm_epoch extends mgm_payment{
 				// transaction_id
 				$transaction_id = $this->_get_transaction_id('x_custom',$_REQUEST);
 				// hook args
-				$args = array('user_id' => $user_id, 'transaction_id'=>$transaction_id);
+				$args = array('user_id'=>$user_id, 'transaction_id'=>$transaction_id);
 				// another membership
 				if(isset($custom['is_another_membership_purchase']) && bool_from_yn($custom['is_another_membership_purchase'])) {
 					$args['another_membership'] = $custom['membership_type'];
@@ -1094,7 +1094,7 @@ class mgm_epoch extends mgm_payment{
 				// notify
 				if( mgm_notify_user_membership_purchase($blogname, $user, $member, $custom, $subs_pack, $s_packs, $system_obj) ){						
 					// update as email sent 
-					$this->update_paymentemail_sent($_POST['x_custom']);	
+					$this->update_paymentemail_sent($_REQUEST['x_custom']);	
 				}				
 			}
 			// notify admin, only if gateway emails on 

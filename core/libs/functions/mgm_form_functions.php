@@ -353,9 +353,9 @@ function mgm_user_register_form($args=array(), $use_default_links = false) {
 			//loop
 			foreach ($cf_register_by_membership_types as $cf_register_by_membership_type) {
 				//membership_type
-				$membership_types_string = $cf_register_by_membership_type['attributes']['register_membership_types_field_alias'];
+				$membership_types_string = (isset($cf_register_by_membership_type['attributes']['register_membership_types_field_alias']))?$cf_register_by_membership_type['attributes']['register_membership_types_field_alias']:null;
 				//check
-				if (preg_match('/\b' . $membership . '\b/', $membership_types_string)) {
+				if (preg_match('/\b' . $membership . '\b/', $membership_types_string) && $membership_types_string !=null) {
 					$show_fields_arr[]=$cf_register_by_membership_type['name'];
 				}
 			}	
@@ -369,6 +369,7 @@ function mgm_user_register_form($args=array(), $use_default_links = false) {
 	}	
 	// # 740
 	// Show fields in short code to filter the registration form #Issue 740
+	$args_fields  = '';
 	if ((isset($args['show_fields']) && !empty($args['show_fields'])) || (isset($membership_args_fields) && !empty($membership_args_fields))) {
 		$package  = (isset($args['package'])) ? $args['package'] : null;
 		$args_fields  = (isset($args['show_fields'])) ? $args['show_fields'] : $membership_args_fields;
@@ -849,7 +850,7 @@ function mgm_user_lostpassword_form($use_default_links = true) {
 /**
  * Custom user profile form
  */
-function mgm_user_profile_form($user_id=NULL, $temp_edit=false) {
+function mgm_user_profile_form($user_id=NULL, $temp_edit=false, $args=array()) {
 	global $wpdb;
 	// get mgm_system
 	$system_obj = mgm_get_class('system');
@@ -883,7 +884,34 @@ function mgm_user_profile_form($user_id=NULL, $temp_edit=false) {
 		$form_action = mgm_get_current_url(); 
 		$form_action = str_replace(array('&updated=true', '?updated=true'),'', $form_action);
 	}
-	
+	//init - issue #1573
+	$show_membership_fields_arr = array();		
+	if(isset($args['membership']) && !empty($args['membership'])){	
+		// membership
+		$membership = $args['membership'];
+		// get active custom fields on register
+		$cf_profile_by_membership_types = mgm_get_class('member_custom_fields')->get_fields_where(array('attributes'=>array('profile_by_membership_types'=>true)));
+		//check
+		if(!empty($cf_profile_by_membership_types)){
+			//loop
+			foreach ($cf_profile_by_membership_types as $cf_profile_by_membership_type) {
+				//membership_type
+				$membership_types_string = (isset($cf_profile_by_membership_type['attributes']['profile_membership_types_field_alias']))?$cf_profile_by_membership_type['attributes']['profile_membership_types_field_alias']:null;
+				//check
+				if (preg_match('/\b' . $membership . '\b/', $membership_types_string) && $membership_types_string !=null) {
+					$show_fields_arr[]=$cf_profile_by_membership_type['name'];
+					$show_membership_fields_arr[]=$cf_profile_by_membership_type;
+					if($cf_profile_by_membership_type['name'] =='password'){
+						foreach ($cf_profile_by_membership_types as $cf_profile_by_membership) {
+							if($cf_profile_by_membership['name'] =='password_conf'){							
+								$show_membership_fields_arr[]=$cf_profile_by_membership;
+							}
+						}						
+					}
+				}
+			}	
+		}
+	}	
 	// get default fields
 	$profile_fields = mgm_get_config('default_profile_fields', array());
 	// get active custom fields on profile page
@@ -891,6 +919,12 @@ function mgm_user_profile_form($user_id=NULL, $temp_edit=false) {
 	
 	$cf_noton_profile = mgm_get_class('member_custom_fields')->get_fields_where(array('display'=>array('on_profile'=> false)));
 	
+	//merge - issue #1573
+	if(isset($show_membership_fields_arr) && is_array($show_membership_fields_arr) && !empty($show_membership_fields_arr)){
+		$cf_profile_page = array_merge($cf_profile_page,$show_membership_fields_arr);
+		$cf_noton_profile = array_merge($cf_noton_profile,$show_membership_fields_arr);
+	}
+		
 	$error_html ='';
 	//issue #867
 	$css_group = mgm_get_css_group();
@@ -1037,8 +1071,10 @@ function mgm_user_profile_form($user_id=NULL, $temp_edit=false) {
 						break;
 					}
 				}
+				// break;
 				if($continue) continue;
-							
+				// check set
+				if( !isset($profile_fields[$group_field]['name'])) continue;			
 				// field wrapper
 				$wrapper_ph = sprintf('[user_field_wrapper_%s]',$profile_fields[$group_field]['name']);						
 				// field label
@@ -1353,7 +1389,11 @@ function mgm_user_profile_form($user_id=NULL, $temp_edit=false) {
 		// apply button filter
 		$button_html = apply_filters('mgm_profile_form_button', $button_html);
 	}
-	
+	//profile by membership - issue #1573
+	if(isset($args['membership']) && !empty($args['membership'])){	
+		// hidden 		
+		$button_html .= sprintf('<input type="hidden" name="membership" value="%s">', $args['membership']);
+	}	
 	// hidden 
 	$button_html .= '<input type="hidden" name="method" value="update_user">';
 	

@@ -235,8 +235,15 @@ function mgm_notify_user_membership_purchase($blogname, $user, $member, $custom,
 				$user_pass = mgm_decrypt_password($member->user_password, $user->ID);
 				// action				
 				// send notification only once - issue #1601
-				if($system_obj->setting['enable_new_user_email_notifiction_after_user_active'] == 'Y') {
-					do_action('mgm_register_user_notification', $user->ID, $user_pass);
+				if($system_obj->setting['enable_new_user_email_notifiction_after_user_active'] == 'Y' && $notify_user) {
+					//check - issue #1794
+					if(isset($member->transaction_id) && $member->transaction_id > 0) {
+						$trans =mgm_get_transaction($member->transaction_id);
+						$trans['data']['notify_user'] = false;
+						mgm_update_transaction(array('data'=>json_encode($trans['data'])), $member->transaction_id);
+					}
+					//notify					
+					do_action('mgm_register_user_notification', $user->ID, $user_pass);					
 				}
 			}
 			//sending upgrade notifaction email to admin

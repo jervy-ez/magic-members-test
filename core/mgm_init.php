@@ -21,7 +21,9 @@ class mgm_init{
 	// php4 construct
 	function mgm_init(){
 		// session initialization:
-		add_action('init', array($this, '_initialize_session'));		
+		if(isset($this) && is_object($this)){			
+			add_action('init', array($this, '_initialize_session'));
+		}
 		// define internal constants
 		$this->_constants();	
 		// load library files	
@@ -313,22 +315,22 @@ class mgm_init{
 			define('MGM_EXTEND_LIBRARY_URL'    , MGM_EXTEND_URL . 'libs/' ); 
 		}
 		
-		// extended modules dir
+		// extended modules base dir
 		if(!defined('MGM_EXTEND_MODULE_BASE_DIR')){
 			define('MGM_EXTEND_MODULE_BASE_DIR'    , MGM_EXTEND_DIR . 'modules' . MGM_DS ); 
 		}
-		// extended modules url
+		// extended modules base url
 		if(!defined('MGM_EXTEND_MODULE_BASE_URL')){
 			define('MGM_EXTEND_MODULE_BASE_URL'    , MGM_EXTEND_URL . 'modules/' ); 
 		}
 		
-		// extended plugins dir
-		if(!defined('MGM_EXTEND_PLUGIN_DIR')){
-			define('MGM_EXTEND_PLUGIN_DIR'    , MGM_EXTEND_DIR . 'plugins' . MGM_DS ); 
+		// extended plugins base dir
+		if(!defined('MGM_EXTEND_PLUGIN_BASE_DIR')){
+			define('MGM_EXTEND_PLUGIN_BASE_DIR'    , MGM_EXTEND_DIR . 'plugins' . MGM_DS ); 
 		}
-		// extended plugins url
-		if(!defined('MGM_EXTEND_PLUGIN_URL')){
-			define('MGM_EXTEND_PLUGIN_URL'    , MGM_EXTEND_URL . 'plugins/' ); 
+		// extended plugins base url
+		if(!defined('MGM_EXTEND_PLUGIN_BASE_URL')){
+			define('MGM_EXTEND_PLUGIN_BASE_URL'    , MGM_EXTEND_URL . 'plugins/' ); 
 		}
 		
 		// extended widgets dir
